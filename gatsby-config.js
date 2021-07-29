@@ -4,13 +4,13 @@ module.exports = {
     title: "MojePortfolio",
   },
   plugins: [
-    {
-      resolve: "gatsby-source-contentful",
-      options: {
-        accessToken: "",
-        spaceId: "",
-      },
-    },
+    // {
+    //   resolve: "gatsby-source-contentful",
+    //   options: {
+    //     accessToken: "",
+    //     spaceId: "",
+    //   },
+    // },
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
     "gatsby-plugin-react-helmet",
