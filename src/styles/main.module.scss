@@ -1,0 +1,85 @@
+@import "./Variables";
+@import "./Mixins";
+@import "./Keyframes";
+
+
+.main{
+  margin: 0;
+}
+
+//First section
+
+.firstSection{
+  position: relative;
+  // height: 500vh;
+}
+
+.curtine{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $mainColor;
+  z-index: 10;
+  animation: curtineFirstLoad .5s 1.4s forwards;
+}
+
+//Second section
+
+.secondSection{
+
+}
+
+
+
+//Third section
+
+.thirdSection{
+  @include flex-mother($justify-content: space-around, $flex-wrap: wrap);
+  padding:  20px 20px 20px 20px;
+  h1{
+    margin: 30px 0;
+    font-size: 2rem;
+    color: $secondColor;
+  }
+}
+
+.project{
+  flex-basis: 100%;
+  margin-bottom: 30px;
+  h2{
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: normal;
+    font-size: 1.4rem;
+    color: $secondColor;
+  }
+  div{
+    clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
+    transition: .3s;
+    img{
+      transition: .3s !important;
+    }
+    &:hover{
+      img{
+        transform: scale(1.02);
+      }
+    }
+  }
+}
+
+.projectLinks{
+  @include flex-mother($justify-content: space-between);
+  margin: 20px 0;
+  clip-path: none;
+  a{
+    margin: 0 10px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: $secondColor;
+    &:visited{
+      color: $secondColor;
+    }
+  }
+}

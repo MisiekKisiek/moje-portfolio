@@ -1,0 +1,280 @@
+@import "./Variables";
+@import "./Mixins";
+@import "./Keyframes";
+
+
+.header{
+  position: relative;
+  height: 70vh;
+  min-height: 340px;
+  padding-top: 16vh;
+  background-color: $secondColor;
+  animation:  firstLoadHeader .5s ease-out;
+}
+
+.menu{
+  @include flex-mother($align-items: center);
+  position: fixed;
+  top:0;
+  left:0;
+  height: 12vh;
+  min-height: 70px;
+  width: 100%;
+  padding: 20px 10px;
+  list-style-type: none;
+  opacity: 1;
+  transition: .5s ease-in-out;
+  z-index: 11;
+  mix-blend-mode: exclusion;
+  li{
+    position: relative;
+    padding: 0 3px;
+    overflow: hidden;
+    button{
+      position: relative;
+      bottom: -100px;
+      border: none;
+      font-size: 1rem;
+      font-weight: normal;
+      text-decoration: none;
+      background-color: transparent;
+      color: rgba(236,236,237,1.98);
+      cursor: pointer;
+    }
+    &:first-child{
+      flex-grow: 1;
+      button{
+        color: rgba(236,236,237,1.8);
+        font-size: 1.1rem;
+        animation: forwards firstLoadFadeUp .5s .3s;
+      }
+    }
+    &:nth-of-type(2){
+      button{
+        animation: forwards firstLoadFadeUp .5s .6s;
+      }
+    }
+    &:nth-of-type(3){
+      button{
+        animation: forwards firstLoadFadeUp .5s .9s;
+      }
+    }
+    &:nth-of-type(4){
+      button{
+        animation: forwards firstLoadFadeUp .5s 1.2s;
+      }
+    }
+  }
+}
+
+.menuHide{
+  opacity: -1;
+  top: -20px;
+}
+
+.greeting{
+  @include flex-mother($justify-content:center, $align-items: center);
+  margin: 0 0 20px 0 ;
+  height: 18vh;
+  h1{
+    position: relative;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: normal;
+    &::after{
+      content:"";
+      display: block;
+      animation: greetingFristLoad  1.3s linear forwards, greetingLast 1.2s 1.3s infinite;
+    }
+  }
+}
+
+.about{
+  padding: 0 15px;
+  div:nth-child(1){
+    overflow: hidden;
+    h1{
+      position: relative;
+      bottom: -100px;
+      font-weight: normal;
+      font-size: 1.7rem;
+      animation: forwards firstLoadFadeUp .5s .8s;
+    }
+  }
+  div:nth-child(2){
+    margin-top: 15px;
+    p{
+      overflow: hidden;
+      span{
+        position: relative;
+        bottom: -100px;
+      }
+      &:nth-of-type(1){
+        text-indent: 15px;
+        span{ 
+          animation: forwards firstLoadFadeUp .4s .8s;
+        }
+      }
+      &:nth-of-type(1){
+        span{ 
+          animation: forwards firstLoadFadeUp .4s 1s;
+        }
+      }
+      &:nth-of-type(2){
+        span{ 
+          animation: forwards firstLoadFadeUp .4s 1.2s;
+        }
+      }
+      &:nth-of-type(3){
+        span{ 
+          animation: forwards firstLoadFadeUp .4s 1.4s;
+        }
+      }
+      &:nth-of-type(4){
+        span{ 
+          animation: forwards firstLoadFadeUp .4s 1.6s;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $breakPoint1){
+  .menu{
+    height: 16vh;
+    min-height: 90px;
+    padding: 0 30px;
+    li{
+      button{
+        font-size: 1.1rem;
+      }
+    }
+    li:first-child{
+      position: absolute;
+      top: 50%;
+      left:50%;
+      transform: translate(-50%,-50%);
+      z-index: 10;
+      button{
+        font-size: 1.6rem;
+      }
+    }
+    li:last-child{
+      @include flex-mother($justify-content: flex-end);
+      flex-grow: 1;
+    }
+  }
+  .greeting{
+    margin-bottom: 0;
+    min-height: 140px;
+  }
+  .about{
+    @include flex-mother($justify-content: space-between);
+    margin-top: 10px;
+    div:nth-child(1){
+      h1{
+        font-size: 1.8rem;
+      }
+    }
+    div:nth-child(2){
+      margin-top: 0;
+    }
+  }
+}
+
+@media (min-width: $breakPoint2){
+  .header{
+    min-height: 400px;
+  }
+  .menu{
+    margin: 30px 0;
+    padding: 20px 40px;
+    li{
+      padding: 0 20px;
+      button{
+        font-size: 1.2rem;
+        &::after{
+          content:"";
+          display: block;
+          position: absolute;
+          bottom: 1px;
+          left: 0;
+          right: 0;
+          height: 30px;
+          color: black;
+          z-index: 999;
+        }
+        &:hover{
+
+        }
+      }
+    }
+    li:first-child{
+      button{
+        font-size: 2rem;
+        border: none;
+      }
+    }
+  }
+  .greeting{
+    margin: 30px 0;
+    h1{
+      font-size: 1.5rem;
+    }
+  }
+  .about{
+    margin-top: 10px;
+    padding: 0 50px;
+    div:nth-child(1){
+      h1{
+        font-size: 2.2rem;
+      }
+    }
+    div:nth-child(2){
+      p{
+        span{
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $breakPoint3){
+  .menu{
+    margin: 30px auto;
+    padding: 20px 60px;
+    li{
+      button{
+        font-size: 1.4rem;
+      }
+    }
+    li:first-child{
+      button{
+        font-size: 2.2rem;
+      }
+    }
+  }
+  .greeting{
+    margin: 70px 0;
+    h1{
+      font-size: 2rem;
+    }
+  }
+  .about{
+    margin-top: 10px;
+    padding: 0 80px;
+    div:nth-child(1){
+      h1{
+        font-size: 2.6rem;
+      }
+    }
+    div:nth-child(2){
+      p{
+        span{
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+}

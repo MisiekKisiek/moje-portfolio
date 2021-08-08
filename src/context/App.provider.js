@@ -8,10 +8,39 @@ class AppProvider extends Component {
         super(props);
         this.state = defaultValue;
     }
+
+    componentDidMount(){
+        window.addEventListener('scroll',()=>{
+            const {oldScroll, newScroll} = this.state;
+            this.setState({
+                newScroll: window.pageYOffset,
+            })
+
+            if(oldScroll - newScroll < 0){
+                this.setState({
+                    scrollDirection: false,
+                })
+            } else if(oldScroll - newScroll >= 0){
+                this.setState({
+                    scrollDirection: true,
+                })
+            }
+
+            this.setState({
+                oldScroll: newScroll,
+            })
+        })
+    }
+
+
+
     render() { 
-        return ( <>
-        
-            </>);
+        return ( <AppContext.Provider value={{
+            scrollDirection: this.state.scrollDirection
+          }}>
+            {this.props.children}
+          </AppContext.Provider>
+        );
     }
 }
  

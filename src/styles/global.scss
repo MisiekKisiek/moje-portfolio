@@ -1,0 +1,18 @@
+@import "./Variables";
+@import "./Mixins";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 17px;
+  font-family: neue-haas-grotesk-display, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background-color: $mainColor;
+}
