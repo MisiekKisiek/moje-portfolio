@@ -9,7 +9,7 @@
   min-height: 340px;
   padding-top: 16vh;
   background-color: $secondColor;
-  animation:  firstLoadHeader .5s ease-out;
+  animation: firstLoadHeader .5s ease-out;
 }
 
 .menu{
@@ -70,6 +70,7 @@
 .menuHide{
   opacity: -1;
   top: -20px;
+  z-index: -1;
 }
 
 .greeting{
@@ -84,7 +85,7 @@
     &::after{
       content:"";
       display: block;
-      animation: greetingFristLoad  1.3s linear forwards, greetingLast 1.2s 1.3s infinite;
+      animation: greetingFristLoad  1.8s linear forwards, greetingLast 1.2s 1.8s infinite;
     }
   }
 }

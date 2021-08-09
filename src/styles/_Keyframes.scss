@@ -30,18 +30,18 @@
     z-index: 10;
 
   }
-  20%{
+  30%{
     border-left: none;
-  }
-  40%{
-    border-left: 1px solid $mainColor;
   }
   60%{
-    border-left: none;
-  }
-  80%{
     border-left: 1px solid $mainColor;
+  }
+  75%{
     left:0;
+  }
+  90%{
+    border-left: none;
+    
   }
   100%{
     display: block;
@@ -50,30 +50,37 @@
     left:105%;
     bottom: 0;
     right: 0;
-    border-left: none;
+    border-left: 1px solid $mainColor;
     background-color: $secondColor;
     z-index: 10;
   }
 }
 @keyframes greetingLast{
   0%{
-    border-left: none;
-  }
-  50%{
     border-left: 1px solid $mainColor;
   }
-  100%{
+  50%{
     border-left: none;
+  }
+  100%{
+    border-left: 1px solid $mainColor;
   }
 }
 
 //MainPage
 
-@keyframes curtineFirstLoad{
+@keyframes sectionFirstLoad{
   0%{
-    background-color: $mainColor;
+    opacity: 0;
   }
   100%{
-    background-color: rgba(0,0,0,.4);
+    opacity: 1;
   }
 }
+
+//First Section
+
+//Second Section
+
+//Third Section
+

@@ -11,7 +11,9 @@
 
 .firstSection{
   position: relative;
-  // height: 500vh;
+  opacity: 0;
+  transition: .5s;
+  animation: sectionFirstLoad 1s 1.4s forwards ease;
 }
 
 .curtine{
@@ -20,24 +22,24 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: $mainColor;
+  background-color: rgba(0,0,0,0.4);
   z-index: 10;
-  animation: curtineFirstLoad .5s 1.4s forwards;
 }
 
 //Second section
 
 .secondSection{
-
+  animation: sectionFirstLoad 1s 1.4s forwards ease;
 }
-
-
 
 //Third section
 
 .thirdSection{
   @include flex-mother($justify-content: space-around, $flex-wrap: wrap);
-  padding:  20px 20px 20px 20px;
+  max-width: 1400px;
+  margin: auto;
+  padding:  20px;
+  animation: sectionFirstLoad 1s 1.4s forwards ease;
   h1{
     margin: 30px 0;
     font-size: 2rem;
@@ -49,37 +51,135 @@
   flex-basis: 100%;
   margin-bottom: 30px;
   h2{
+    position: relative;
     margin-bottom: 10px;
+    padding-top: 10px;
     text-align: center;
     font-weight: normal;
     font-size: 1.4rem;
-    color: $secondColor;
+    color: white;
+    &::after{
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 10%;
+      width: 80%;
+      height: 1px;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.2);
+    }
   }
+}
+
+.projectScreen{
+  position: relative;
+  clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
   div{
-    clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
     transition: .3s;
     img{
       transition: .3s !important;
     }
+  }
+  a{
+    @include flex-mother($align-items: center, $justify-content: center);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 50%;
+    height: 100%;
+    border-right: 1px solid rgba(255,255,255,0.4);
+    font-size: 1.05rem;
+    text-decoration: none;
+    background-color: rgba(0,0,0,0.45);
+    color: $secondColor;
+    &:nth-of-type(2){
+      right: 0;
+      left: 50%;
+      border-right: none;
+    }
+    &:visited{
+      color: $secondColor;
+    }
+  }
+}
+
+@media (min-width: $breakPoint1){
+  .thirdSection{
+    h1{
+      flex-basis: 100%;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+  }
+  .project{
+    flex-basis: 50%;
+    &:nth-child(even){
+      padding: 0 10px 0 0;
+    }
+    &:nth-child(odd){
+      padding: 0 0 0 10px;
+    }
+  }
+}
+
+@media (min-width: $breakPoint2){
+  .project{
+    flex-basis: 42%;
+    &:nth-child(even){
+      padding: 0;
+    }
+    &:nth-child(odd){
+      padding: 0;
+    }
+  }
+  .projectScreen{
+    a{
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media (min-width: $breakPoint3){
+  .thirdSection{
+    h1{
+      font-size: 2.5rem;
+    }
+  }
+  .project{
+    max-width: 540px;
+    &:nth-child(even){
+      padding: 0;
+    }
+    &:nth-child(odd){
+      padding: 0;
+    }
+    h2{
+      padding: 20px 0 15px 0 ;
+      font-size: 1.8rem;
+    }
+  }
+  .projectScreen{
     &:hover{
       img{
         transform: scale(1.02);
       }
     }
-  }
-}
-
-.projectLinks{
-  @include flex-mother($justify-content: space-between);
-  margin: 20px 0;
-  clip-path: none;
-  a{
-    margin: 0 10px;
-    font-size: 1.2rem;
-    text-decoration: none;
-    color: $secondColor;
-    &:visited{
-      color: $secondColor;
+    a{
+      font-size: 1.3rem;
+      transition: .5s;
+      opacity: 0.3;
+      &:nth-of-type(2){
+      }
+      &:hover{
+        background-color: rgba(255,255,255,.2);
+        color: rgb(50,50,50);
+      }
+    }
+    &:hover{
+      a{
+        opacity: 1;
+      }
     }
   }
 }

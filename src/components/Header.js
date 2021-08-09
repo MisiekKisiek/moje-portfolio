@@ -8,11 +8,11 @@ import AppContext from '../context/App.context';
 //styles
 import * as headerStyles from '../styles/header.module.scss';
 
-const Header = ({}) => {
+const Header = ({ }) => {
 
   const {
-		scrollDirection,
-	} = useContext(AppContext);
+    scrollDirection,
+  } = useContext(AppContext);
 
   const data = useStaticQuery(graphql`
     query{
@@ -24,24 +24,24 @@ const Header = ({}) => {
     }
   `)
 
-  const {author} = data.site.siteMetadata;
+  const { author } = data.site.siteMetadata;
 
-  return ( <header 
+  return (<header
     className={`${headerStyles.header}`}
     id="header"
   >
-    <ul className={`${headerStyles.menu} ${scrollDirection?null:headerStyles.menuHide}`}>
+    <ul className={`${headerStyles.menu} ${scrollDirection ? null : headerStyles.menuHide}`}>
       <li>
-        <button onClick={()=>{scrollTo('#header')}}>{author.toUpperCase()}</button>
+        <button onClick={() => { scrollTo('#header') }}>{author.toUpperCase()}</button>
       </li>
       <li>
-        <button onClick={()=>{scrollTo('#main-section')}}>About</button>
+        <button onClick={() => { scrollTo('#main-section') }}>About</button>
       </li>
       <li>
-        <button onClick={()=>{scrollTo('#some-id')}}>Works</button>
+        <button onClick={() => { scrollTo('#projects') }}>Works</button>
       </li>
       <li>
-        <button onClick={()=>{scrollTo('#some-id')}}>Contact</button>
+        <button onClick={() => { scrollTo('#contact') }}>Contact</button>
       </li>
     </ul>
     <div className={headerStyles.greeting}>
@@ -63,10 +63,10 @@ const Header = ({}) => {
         </p>
         <p>
           <span>opportunities to grow up :)</span>
-        </p> 
+        </p>
       </div>
     </section>
-  </header> );
+  </header>);
 }
- 
+
 export default Header;

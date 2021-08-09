@@ -1,12 +1,15 @@
-import React from "react";
-import { useStaticQuery, graphql, Link} from 'gatsby';
-import { GatsbyImage, getImage} from "gatsby-plugin-image"
+import React, { useRef } from "react";
+import { useStaticQuery, graphql, Link } from 'gatsby';
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 //Components
 
 
 //Styles
 import * as mainStyles from '../styles/main.module.scss';
+
+//Tools
+import { projectAnimationFunction } from '../tools/tools';
 
 
 const Main = () => {
@@ -31,6 +34,7 @@ const Main = () => {
               gatsbyImageData(
                 layout: FULL_WIDTH
               )
+              title
             }
           }
         }
@@ -46,21 +50,28 @@ const Main = () => {
   const desk = getImage(data.deskImage)
 
   const projects = data.allContentfulPortfolioProjects.edges;
-  console.log(projects[0].node.projectScreen);
-  
-  console.log(projects);
+
+  console.log(projectAnimationFunction(window, 170));
 
   const renderProjects = () => {
-    const projectsElements = projects.map((project)=>{
-      const {id, projectName, liveLink, githubLink} = project.node;
+    const projectsElements = projects.map((project) => {
+      const { id, projectName, liveLink, githubLink } = project.node;
       const projectScreen = getImage(project.node.projectScreen);
-      return(<div 
+      return (<div
         className={mainStyles.project}
         key={id}
       >
         <h2>{projectName}</h2>
-        <GatsbyImage image={projectScreen} alt="please include an alt" />
-        <div className={mainStyles.projectLinks}>
+        <div
+          style={{
+            clipPath: `polygon(0 0, ${projectAnimationFunction(window, 150)}% 5%, 100% 100%, 0 95%)`,
+          }}
+          className={mainStyles.projectScreen}
+        >
+          <GatsbyImage
+            image={projectScreen}
+            alt={project.node.projectScreen.title}
+          />
           <a href={liveLink}>Live</a>
           <a href={githubLink}>Github</a>
         </div>
@@ -68,8 +79,8 @@ const Main = () => {
     })
     return projectsElements
   }
-  
-  return ( <main 
+
+  return (<main
     className={mainStyles.main}
     id="main-section"
   >
@@ -78,13 +89,16 @@ const Main = () => {
       <GatsbyImage image={desk} alt="desk image" />
     </section>
     <section className={mainStyles.secondSection}>
-      
+
     </section>
-    <section className={mainStyles.thirdSection}>
-    <h1>My projects</h1>
+    <section
+      className={mainStyles.thirdSection}
+      id="projects"
+    >
+      <h1>My projects</h1>
       {renderProjects()}
     </section>
-  </main> );
+  </main>);
 }
- 
+
 export default Main;
