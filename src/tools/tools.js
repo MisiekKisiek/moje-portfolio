@@ -3,4 +3,18 @@ const projectAnimationFunction = (element, min) => {
   return value
 }
 
-export { projectAnimationFunction }
+const floatProjectFunc = () => {
+  const justifyOption = Math.round(Math.random() * 4);
+  switch (justifyOption) {
+    case 0 || 3:
+      return "left"
+    case 1:
+      return "right"
+    case 2:
+      return "none"
+    default:
+      return
+  }
+}
+
+export { projectAnimationFunction, floatProjectFunc }

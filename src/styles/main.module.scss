@@ -36,19 +36,19 @@
 
 .thirdSection{
   @include flex-mother($justify-content: space-around, $flex-wrap: wrap);
-  max-width: 1400px;
+  max-width: 1024px;
   margin: auto;
   padding:  20px;
   animation: sectionFirstLoad 1s 1.4s forwards ease;
   h1{
-    margin: 30px 0;
+    margin: 20px 0 40px 0;
     font-size: 2rem;
     color: $secondColor;
   }
 }
 
 .project{
-  flex-basis: 100%;
+  flex-basis: 100% ;
   margin-bottom: 30px;
   h2{
     position: relative;
@@ -74,7 +74,6 @@
 
 .projectScreen{
   position: relative;
-  clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
   div{
     transition: .3s;
     img{
@@ -113,24 +112,24 @@
     }
   }
   .project{
-    flex-basis: 50%;
-    &:nth-child(even){
-      padding: 0 10px 0 0;
-    }
-    &:nth-child(odd){
-      padding: 0 0 0 10px;
-    }
+    flex-basis: 50% !important;
+    padding: 0 10px;
   }
 }
 
 @media (min-width: $breakPoint2){
+  .thirdSection{
+    h1{
+      margin: 20px 0 20px 0;
+    }
+  }
   .project{
     flex-basis: 42%;
-    &:nth-child(even){
-      padding: 0;
-    }
-    &:nth-child(odd){
-      padding: 0;
+    padding: 20px;
+    h2{
+      &::after{
+        content: none;
+      }
     }
   }
   .projectScreen{
@@ -142,18 +141,13 @@
 
 @media (min-width: $breakPoint3){
   .thirdSection{
+    width: 1024px;
     h1{
       font-size: 2.5rem;
     }
   }
   .project{
     max-width: 540px;
-    &:nth-child(even){
-      padding: 0;
-    }
-    &:nth-child(odd){
-      padding: 0;
-    }
     h2{
       padding: 20px 0 15px 0 ;
       font-size: 1.8rem;
@@ -181,5 +175,13 @@
         opacity: 1;
       }
     }
+  }
+}
+
+//Fourth section
+
+.fourthSection{
+  h1{
+    
   }
 }
