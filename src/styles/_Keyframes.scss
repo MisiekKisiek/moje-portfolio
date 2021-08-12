@@ -84,3 +84,32 @@
 
 //Third Section
 
+//fourthSection
+
+@keyframes wordWalking {
+  0%{
+    opacity: 0;
+    left: -250px;
+  }
+  9%{
+    opacity: 0;
+    left: -250px;
+  }
+  13%{
+    opacity: 1;
+    left: -150px;
+  }
+  87%{
+    opacity: 1;
+    left: -150px;
+  }
+  91%{
+    opacity: 0;
+    left: -50px;
+  }
+  100%{
+    opacity: 0;
+    left: -50px;
+  }
+}
+

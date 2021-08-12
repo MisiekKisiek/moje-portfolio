@@ -5,7 +5,7 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
+    siteUrl: "https://smarthydro.pl",
     title: "Portfolio MisiekKisiek",
     author: "MisiekKisiek",
   },
@@ -21,11 +21,17 @@ module.exports = {
       resolve: 'gatsby-plugin-sass',
     },
     "gatsby-plugin-image",
+    {
+      resolve: "gatsby-plugin-transition-link",
+      options: {
+        layout: require.resolve(`./src/layouts/layout.js`)
+      }
+    },
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
-    `gatsby-plugin-scroll-reveal`,
+    "gatsby-plugin-scroll-reveal",
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -33,12 +39,6 @@ module.exports = {
         path: "./src/images/",
       },
       __key: "images",
-    },
-    {
-      resolve: "gatsby-plugin-transition-link",
-      options: {
-        layout: require.resolve(`./src/layouts/layout.js`)
-      }
     },
   ],
 };

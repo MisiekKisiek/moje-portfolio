@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
-import { useStaticQuery, graphql, Link } from 'gatsby';
+import { useStaticQuery, graphql} from 'gatsby';
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { Formik, Field, Form } from 'formik';
+import emailjs from 'emailjs-com';
 
 //Components
 
@@ -9,12 +11,11 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import * as mainStyles from '../styles/main.module.scss';
 
 //Tools
-import { } from '../tools/tools';
-
+import { wordShow } from '../tools/tools';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const Main = () => {
-
-  const element = useRef(null);
 
   const data = useStaticQuery(graphql`
     query{
@@ -66,9 +67,11 @@ const Main = () => {
       >
         <h2
           data-sal="slide-up"
-          data-sal-delay="300"
+          data-sal-delay="1000"
           data-sal-easing="ease"
-        >{projectName}</h2>
+        >
+          {projectName}
+        </h2>
         <div
           className={mainStyles.projectScreen}
           style={{
@@ -78,10 +81,6 @@ const Main = () => {
           <GatsbyImage
             image={projectScreen}
             alt={project.node.projectScreen.title}
-          // style={{
-          //   transform: `matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -2000, 0, 1)`,
-          //   color: "red"
-          // }}
           />
           <a href={liveLink}>Live</a>
           <a href={githubLink}>Github</a>
@@ -89,6 +88,15 @@ const Main = () => {
       </div>)
     })
     return projectsElements
+  }
+
+  const handleSendForm = (values) => {
+    emailjs.sendForm('gmail', 'PortfolioTemplate', values, process.env.EMAILJS_USER_ID)
+      .then((result) => {
+        console.log("ok")
+      }, (error) => {
+        console.log(error)
+      });
   }
 
   return (<main
@@ -100,7 +108,6 @@ const Main = () => {
       <GatsbyImage image={desk} alt="desk image" />
     </section>
     <section className={mainStyles.secondSection}>
-
     </section>
     <section
       className={mainStyles.thirdSection}
@@ -113,7 +120,43 @@ const Main = () => {
       className={mainStyles.fourthSection}
       id="contact"
     >
-      <h1>Mail me</h1>
+      <h1>
+        <span>M</span>
+        <span>a</span>
+        <span>i</span>
+        <span>l</span>
+        {" "}
+        <span>m</span>
+        <span>e</span>
+        <span>.</span>
+        <span>.</span>
+        <span>.</span>
+        {" "}
+        <FontAwesomeIcon icon={faArrowDown}/>
+      </h1>
+      <Formik
+        initialValues={{
+          name: "gsdag",
+          email: "gsag@fsaf.pl",
+          message: "gsagas",
+        }}
+        onSubmit={async (values)=>{
+          handleSendForm(values);
+        }}
+      >
+        <Form className={mainStyles.form}>
+          <label htmlFor="message"></label>
+          <Field as='textarea' id="message" name='message' placeholder="message"/>
+          <label htmlFor="email"></label>
+          <Field id="email" name="email" placeholder="e-mail" type="email" autoComplete="off"/>
+          <label htmlFor="name"></label>
+          <Field id="name" name="name" placeholder="name" type="name" autoComplete="off"/>
+          <button type="submit">
+           <FontAwesomeIcon icon={faArrowRight}/>
+          </button>
+        </Form>
+      </Formik>
+      
     </section>
   </main>);
 }

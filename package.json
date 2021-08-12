@@ -15,8 +15,13 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.15",
     "dot-env": "0.0.1",
+    "emailjs-com": "^3.2.0",
     "env-cmd": "^10.1.0",
+    "formik": "^2.2.9",
     "gatsby": "^3.10.2",
     "gatsby-image": "^3.10.0",
     "gatsby-plugin-image": "^1.10.1",
@@ -33,7 +38,7 @@
     "gatsby-transformer-sharp": "^3.10.0",
     "node-sass": "^6.0.1",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0"
   }
 }
