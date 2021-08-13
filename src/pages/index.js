@@ -1,21 +1,25 @@
-import React, { useRef } from "react";
-import { useStaticQuery, graphql} from 'gatsby';
+import React, { useState } from "react";
+import { useStaticQuery, graphql } from 'gatsby';
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { Formik, Field, Form } from 'formik';
 import emailjs from 'emailjs-com';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 //Components
-
+import TextError from '../components/TextError';
 
 //Styles
 import * as mainStyles from '../styles/main.module.scss';
 
 //Tools
-import { wordShow } from '../tools/tools';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+
 
 const Main = () => {
+
+  const [name, setname] = useState("");
+  const [email, setemail] = useState("");
+  const [message, setmessage] = useState("");
+  const [errorMessage, seterrorMessage] = useState("");
 
   const data = useStaticQuery(graphql`
     query{
@@ -90,13 +94,16 @@ const Main = () => {
     return projectsElements
   }
 
-  const handleSendForm = (values) => {
-    emailjs.sendForm('gmail', 'PortfolioTemplate', values, process.env.EMAILJS_USER_ID)
-      .then((result) => {
-        console.log("ok")
-      }, (error) => {
-        console.log(error)
-      });
+  const handleSendEmail = (e) => {
+    e.preventDefault();
+    console.log(e.target)
+    if (e.target.value) { }
+    // emailjs.sendForm('gmail', 'Portfolio', e.target, `user_qZY7FllS46aSyJuEosQN8`)
+    //   .then((result) => {
+    //     console.log(result.text)
+    //   }, (error) => {
+    //     console.log(error.text)
+    //   });
   }
 
   return (<main
@@ -132,31 +139,45 @@ const Main = () => {
         <span>.</span>
         <span>.</span>
         {" "}
-        <FontAwesomeIcon icon={faArrowDown}/>
+        <FontAwesomeIcon icon={faArrowDown} />
       </h1>
-      <Formik
-        initialValues={{
-          name: "gsdag",
-          email: "gsag@fsaf.pl",
-          message: "gsagas",
-        }}
-        onSubmit={async (values)=>{
-          handleSendForm(values);
-        }}
+      <form
+        className={mainStyles.form}
+        onSubmit={handleSendEmail}
       >
-        <Form className={mainStyles.form}>
-          <label htmlFor="message"></label>
-          <Field as='textarea' id="message" name='message' placeholder="message"/>
-          <label htmlFor="email"></label>
-          <Field id="email" name="email" placeholder="e-mail" type="email" autoComplete="off"/>
-          <label htmlFor="name"></label>
-          <Field id="name" name="name" placeholder="name" type="name" autoComplete="off"/>
-          <button type="submit">
-           <FontAwesomeIcon icon={faArrowRight}/>
-          </button>
-        </Form>
-      </Formik>
-      
+        <TextError errorMessage={errorMessage} />
+        <label htmlFor="message"></label>
+        <textarea
+          id="message"
+          name='message'
+          placeholder="message"
+          value={message}
+          onChange={(e) => { setmessage(e.target.value) }}
+        />
+        <label htmlFor="email"></label>
+        <input
+          id="email"
+          name="email"
+          placeholder="e-mail"
+          type="email"
+          autoComplete="off"
+          value={email}
+          onChange={(e) => { setemail(e.target.value) }}
+        />
+        <label htmlFor="name"></label>
+        <input
+          id="name"
+          name="name"
+          placeholder="name"
+          type="name"
+          autoComplete="off"
+          value={name}
+          onChange={(e) => { setname(e.target.value) }}
+        />
+        <button type="submit">
+          <FontAwesomeIcon icon={faArrowRight} />
+        </button>
+      </form>
     </section>
   </main>);
 }
