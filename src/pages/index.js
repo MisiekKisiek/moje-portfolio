@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useStaticQuery, graphql } from 'gatsby';
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import emailjs from 'emailjs-com';
@@ -21,12 +21,20 @@ import * as mainStyles from '../styles/main.module.scss';
 const Main = () => {
 
   const [bouncyBallPosition, setbouncyBallPosition] = useState(0);
+  const aboutSpanFirst = useRef(null);
+  const aboutSpanSecond = useRef(null);
+  const [aboutSpanFirstPosition, setaboutSpanFirstPosition] = useState(0);
+  const [aboutSpanSecondPosition, setaboutSpanSecondPosition] = useState(0);
   const [errorMessage, seterrorMessage] = useState("");
 
   useEffect(() => {
-    window.addEventListener('scroll',()=>{
-      const position = -window.pageYOffset/10;
-      setbouncyBallPosition(position);
+    window.addEventListener('scroll', () => {
+      const bouncyBallPosition = -window.pageYOffset / 10;
+      setbouncyBallPosition(bouncyBallPosition);
+      const spanFirstPosition = -(window.pageYOffset - aboutSpanFirst.current.offsetTop) / 20 + 12;
+      setaboutSpanFirstPosition(spanFirstPosition);
+      const spanSecondPosition = -(window.pageYOffset - aboutSpanSecond.current.offsetTop) / 20 + 28;
+      setaboutSpanSecondPosition(spanSecondPosition);
     })
   }, [])
 
@@ -77,13 +85,13 @@ const Main = () => {
 
     const projectsElements = projects.map((project) => {
 
-      const {id, projectName, liveLink, githubLink } = project.node;
+      const { id, projectName, liveLink, githubLink } = project.node;
       const projectScreen = getImage(project.node.projectScreen);
       const alt = project.node.projectScreen.title;
-      const props = {id, projectName, liveLink, githubLink, projectScreen, alt};
+      const props = { id, projectName, liveLink, githubLink, projectScreen, alt };
 
       return (
-      <Project {...props}/>
+        <Project {...props} key={id} />
       )
     })
     return projectsElements
@@ -119,27 +127,39 @@ const Main = () => {
         <span>contact</span>
       </button>
     </section>
-    <section 
+    <section
       className={mainStyles.secondSection}
       id="about"
     >
       <h1>About</h1>
       <div className={mainStyles.profileImage}>
-        <GatsbyImage image={profileImage} alt="profile photo"/>
-        <div 
+        <GatsbyImage image={profileImage} alt="profile photo" />
+        <div
           className={mainStyles.walkingText}
         >
-          <span>Hello, it's me! Hello, it's me!</span>
+          <span
+            ref={aboutSpanFirst}
+            style={{
+              top: `${Math.min(Math.max(aboutSpanFirstPosition, -100), 0)}%`,
+            }}
+          >Hello, it's me! Hello, it's me! Hello, it's me! Hello, it's me!</span>
         </div>
-        <div 
+        <div
           className={mainStyles.walkingText}
         >
-          <span>Hello, it's me! Hello, it's me!</span>
-        </div> 
+          <span
+            ref={aboutSpanSecond}
+            style={{
+              left: `${Math.min(Math.max(aboutSpanSecondPosition, -100), 0)}%`,
+            }}
+          >
+            Hello, it's me! Hello, it's me! Hello, it's me! Hello, it's me!
+          </span>
+        </div>
       </div>
-      <p>
+      <p className={mainStyles.aboutParagraph}>
         Hi!
-        As 
+        As
       </p>
     </section>
     <section
@@ -170,35 +190,35 @@ const Main = () => {
       <Formik
         initialValues={{
           name: "",
-          email:"",
-          message:"",
+          email: "",
+          message: "",
         }}
-        onSubmit={(values, actions)=>{
-          handleSendEmail(values, ()=>{actions.resetForm({name:"", email:"", message:""})});
+        onSubmit={(values, actions) => {
+          handleSendEmail(values, () => { actions.resetForm({ name: "", email: "", message: "" }) });
         }}
       >
         <Form className={mainStyles.form}>
-          <TextError errorMessage={errorMessage}/>
-          <Field 
-            as="textarea" 
-            name="message" 
-            id="message" 
-            type="message" 
-            placeholder="message" 
+          <TextError errorMessage={errorMessage} />
+          <Field
+            as="textarea"
+            name="message"
+            id="message"
+            type="message"
+            placeholder="message"
             autoComplete="off"
           />
-          <Field 
-            name="email" 
-            id="email" 
-            type="email" 
-            placeholder="email" 
+          <Field
+            name="email"
+            id="email"
+            type="email"
+            placeholder="email"
             autoComplete="off"
           />
-          <Field 
-            name="name" 
-            id="name" 
-            type="name" 
-            placeholder="name" 
+          <Field
+            name="name"
+            id="name"
+            type="name"
+            placeholder="name"
             autoComplete="off"
           />
           <button type="submit">

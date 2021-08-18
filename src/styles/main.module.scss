@@ -127,19 +127,19 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(0,0,0,0.3);
+      background-color: rgba(0,0,0,0.1);
     }
   }
 }
 
 .walkingText{
   span{
+    position: relative;
+    display: inline-block;
     max-width: 100%;
     font-size: 3.4rem;
     font-weight: bold;
     white-space:nowrap;
-    overflow: hidden;
-
   }
   &:nth-child(2){
     position: absolute;
