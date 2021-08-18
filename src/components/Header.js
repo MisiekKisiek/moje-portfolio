@@ -35,7 +35,7 @@ const Header = ({ }) => {
         <button onClick={() => { scrollTo('#header') }}>{author.toUpperCase()}</button>
       </li>
       <li>
-        <button onClick={() => { scrollTo('#main-section') }}>About</button>
+        <button onClick={() => { scrollTo('#about') }}>About</button>
       </li>
       <li>
         <button onClick={() => { scrollTo('#projects') }}>Works</button>
@@ -62,7 +62,7 @@ const Header = ({ }) => {
           <span>technologies and now looking for new </span>
         </p>
         <p>
-          <span>opportunities to grow up :)</span>
+          <span>opportunities to grow :)</span>
         </p>
       </div>
     </section>

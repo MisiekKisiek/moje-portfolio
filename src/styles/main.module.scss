@@ -26,11 +26,157 @@
   z-index: 10;
 }
 
+.bouncyBall{
+  @include flex-mother($flex-direction: column, $align-items: center, $justify-content:center);
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  transform: translate(-50%,50%);
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(248, 123, 77, 1);
+  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+  cursor: pointer;
+  z-index: 11;
+  span{
+    position: relative;
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgb(255, 40, 0);
+  }
+}
+
+@media (min-width: $breakPoint1){
+  .bouncyBall{
+    width: 140px;
+    height: 140px;
+    span{
+      font-size: 1.4rem;
+    }
+  }
+}
+
+@media (min-width: $breakPoint2){
+  .bouncyBall{
+    span{
+      &::after{
+        content: "";
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        transition: .4s;
+      }
+      &:first-child{
+        &::after{
+          transition: .6s;
+        }
+      }
+    }
+    &:hover{
+      span{
+        &::after{
+          width: 100%;
+          background-color: rgb(255, 40, 0);
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
 //Second section
 
 .secondSection{
+  @include flex-mother($flex-direction: column, $align-items: center, $flex-wrap: wrap);
   animation: sectionFirstLoad 1s 1.4s forwards ease;
+  color: rgba(255,255,255,1);
+  h1{
+    margin: 35px 0 40px 0;
+    font-size: 2rem;
+    color: $secondColor;
+  }
 }
+
+.profileImage{
+  position: relative;
+  width: 100%;
+  div:nth-of-type(1){
+    position: relative;
+    width: 75%;
+    margin-left: 5%;
+    border-radius: 5px;
+    border: 1px solid black;
+    box-sizing: unset;
+    &::after{
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.3);
+    }
+  }
+}
+
+.walkingText{
+  span{
+    max-width: 100%;
+    font-size: 3.4rem;
+    font-weight: bold;
+    white-space:nowrap;
+    overflow: hidden;
+
+  }
+  &:nth-child(2){
+    position: absolute;
+    height: 100%;
+    width: 20%;
+    top: 0;
+    right: 0;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    overflow: hidden;
+    z-index: -1;
+    span{
+    }
+  }
+  &:nth-child(3){
+    position: relative;
+    background-color: $mainColor;
+    z-index: 11;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Third section
 
@@ -38,7 +184,8 @@
   @include flex-mother($justify-content: space-around, $flex-wrap: wrap);
   max-width: 1400px;
   margin: auto;
-  padding:  20px;
+  padding: 20px;
+  padding-bottom: 0;
   animation: sectionFirstLoad 1s 1.4s forwards ease;
   h1{
     margin: 20px 0 40px 0;
@@ -178,13 +325,29 @@
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Fourth section
 
 .fourthSection{
   max-width: 1400px;
   margin: auto;
+  padding: 40px 0 0 0;
   h1{
-    margin: 20px auto;
+    margin: 0 auto 20px auto;
     text-align: center;
     font-size: 2.2rem;
     color: $secondColor;
@@ -197,8 +360,9 @@
   margin: 0 auto 40px auto;
   span{
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -3px;
+    left: 10px;
+    color: rgba(255,255,255,0.8);
   }
   input{
     width: 100%;
@@ -243,6 +407,7 @@
     bottom: 0;
     right: 0;
     height: 60px;
+    line-height: 60px;
     width: 60px;
     border: none;
     border-left: 1px solid rgba(255,255,255,0.4);
@@ -258,11 +423,17 @@
     width: 60px;
     height: 60px;
     border: none;
-    border-left: 1px solid rgba(255,255,255,0.4);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-right: none;
     font-size: 2.6rem;
-    background-color: transparent;
+    background-color: $mainColor;
     color: rgba(255,255,255,0.8);
     cursor: pointer;
+    transition: .3s;
+    &:hover{
+      border-color: rgba(248, 123, 77, 1);
+      color: rgba(248, 123, 77, 1);
+    }
   }
 }
 
@@ -271,6 +442,11 @@
     textarea, input{
       border: 1px solid rgba(255,255,255,0.4);
       border-radius: 3px;
+    }
+    button{
+      border: 1px solid rgba(255,255,255,0.4);
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
     }
   }
 }

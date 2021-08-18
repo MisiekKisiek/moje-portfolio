@@ -1,0 +1,88 @@
+@import "./Variables";
+@import "./Mixins";
+@import "./Keyframes";
+
+.footer{
+  @include flex-mother($flex-direction: column, $align-items: center);
+  min-height: 20vh;
+  max-width: 800px;
+  width: 80%;
+  margin: 10px auto 0 auto;
+}
+
+.footerProjects{
+  margin: 0 0 40px 0;
+  h2{
+    display: inline-block;
+    padding-bottom: 10px;
+    font-size: 2rem;
+    color: rgba(255,255,255,0.5);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+  }
+  ul{
+    list-style-type: none;
+    li{
+      margin: 3px 0;
+      &:first-child{
+        margin-top: 20px;
+      }
+      a{
+        color: rgba(255,255,255,0.5);
+        transition: .2s;
+      }
+    }
+  }
+}
+
+.footerContact{
+  @include flex-mother($justify-content: flex-end);
+  margin: 10px 0 60px 0;
+  span{
+    margin: 0 10px;
+    a{
+      font-size: 1.5rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      &:visited{
+        color: rgba(255,255,255,0.5);
+      }
+    }
+  }
+}
+
+@media (min-width: $breakPoint1){
+  .footer{
+    @include flex-mother($flex-direction: row, $justify-content: center);
+    margin: 60px auto;
+  }
+  .footerProjects{
+    flex-basis: 50%;
+    h2{
+      font-size: 2.2rem;
+    }
+    ul{
+      li{
+        a{
+          font-size: 1.1rem;
+          &:hover{
+            color: rgba(255,255,255,0.8);
+          }
+        }
+      }
+    }
+  }
+  .footerContact{
+    flex-basis: 50%;
+    margin-top: 30px;
+    span{
+      margin: 0 20px;
+      a{
+        font-size: 1.8rem;
+        transition: .3s;
+        &:hover{
+          color: rgba(248, 123, 77, 1);
+        }
+      }
+    }
+  }
+}

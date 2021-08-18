@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useStaticQuery, graphql } from 'gatsby';
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import emailjs from 'emailjs-com';
+import { Formik, Form, Field } from "formik";
+import scrollTo from 'gatsby-plugin-smoothscroll';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
+
 //Components
+import Project from '../components/Project';
 import TextError from '../components/TextError';
 
 //Styles
@@ -16,14 +20,26 @@ import * as mainStyles from '../styles/main.module.scss';
 
 const Main = () => {
 
-  const [name, setname] = useState("");
-  const [email, setemail] = useState("");
-  const [message, setmessage] = useState("");
+  const [bouncyBallPosition, setbouncyBallPosition] = useState(0);
   const [errorMessage, seterrorMessage] = useState("");
+
+  useEffect(() => {
+    window.addEventListener('scroll',()=>{
+      const position = -window.pageYOffset/10;
+      setbouncyBallPosition(position);
+    })
+  }, [])
 
   const data = useStaticQuery(graphql`
     query{
       deskImage: file(relativePath: {eq: "desk.jpg"}){
+        childImageSharp {
+					gatsbyImageData(
+            layout: FULL_WIDTH
+          )
+				}
+      }
+      profileImage: file(relativePath: {eq: "profil.jpg"}){
         childImageSharp {
 					gatsbyImageData(
             layout: FULL_WIDTH
@@ -54,74 +70,84 @@ const Main = () => {
     }
   `);
 
-  const desk = getImage(data.deskImage)
+  const desk = getImage(data.deskImage);
+  const profileImage = getImage(data.profileImage);
 
-  const projects = data.allContentfulPortfolioProjects.edges;
-
-  const renderProjects = () => {
+  const renderProjects = (projects) => {
 
     const projectsElements = projects.map((project) => {
 
-      const { id, projectName, liveLink, githubLink } = project.node;
+      const {id, projectName, liveLink, githubLink } = project.node;
       const projectScreen = getImage(project.node.projectScreen);
+      const alt = project.node.projectScreen.title;
+      const props = {id, projectName, liveLink, githubLink, projectScreen, alt};
 
-      return (<div
-        className={mainStyles.project}
-        key={id}
-      >
-        <h2
-          data-sal="slide-up"
-          data-sal-delay="1000"
-          data-sal-easing="ease"
-        >
-          {projectName}
-        </h2>
-        <div
-          className={mainStyles.projectScreen}
-          style={{
-            clipPath: `polygon(0 ${Math.random() * 5}%, 100% ${Math.random() * 5}%, 100% ${Math.random() * 5 + 95}%, 0 ${Math.random() * 5 + 95}%)`,
-          }}
-        >
-          <GatsbyImage
-            image={projectScreen}
-            alt={project.node.projectScreen.title}
-          />
-          <a href={liveLink}>Live</a>
-          <a href={githubLink}>Github</a>
-        </div>
-      </div>)
+      return (
+      <Project {...props}/>
+      )
     })
     return projectsElements
   }
 
-  const handleSendEmail = (e) => {
-    e.preventDefault();
-    console.log(e.target)
-    if (e.target.value) { }
-    // emailjs.sendForm('gmail', 'Portfolio', e.target, `user_qZY7FllS46aSyJuEosQN8`)
-    //   .then((result) => {
-    //     console.log(result.text)
-    //   }, (error) => {
-    //     console.log(error.text)
-    //   });
+  const handleSendEmail = (values, resetFunc) => {
+    emailjs.send('gmail', 'Portfolio', values, `user_qZY7FllS46aSyJuEosQN8`)
+      .then((result) => {
+        resetFunc();
+        seterrorMessage("We send it!");
+        console.log(result.status);
+      }, (error) => {
+        seterrorMessage("Something went wrong, try again later :(");
+        console.log(error.text);
+
+      });
   }
 
   return (<main
     className={mainStyles.main}
-    id="main-section"
   >
     <section className={mainStyles.firstSection}>
       <div className={mainStyles.curtine}></div>
       <GatsbyImage image={desk} alt="desk image" />
+      <button
+        className={mainStyles.bouncyBall}
+        onClick={() => { scrollTo('#contact') }}
+        style={{
+          transform: `translate(-50%, ${bouncyBallPosition}%)`,
+        }}
+      >
+        <span>just</span>
+        <span>contact</span>
+      </button>
     </section>
-    <section className={mainStyles.secondSection}>
+    <section 
+      className={mainStyles.secondSection}
+      id="about"
+    >
+      <h1>About</h1>
+      <div className={mainStyles.profileImage}>
+        <GatsbyImage image={profileImage} alt="profile photo"/>
+        <div 
+          className={mainStyles.walkingText}
+        >
+          <span>Hello, it's me! Hello, it's me!</span>
+        </div>
+        <div 
+          className={mainStyles.walkingText}
+        >
+          <span>Hello, it's me! Hello, it's me!</span>
+        </div> 
+      </div>
+      <p>
+        Hi!
+        As 
+      </p>
     </section>
     <section
       className={mainStyles.thirdSection}
       id="projects"
     >
       <h1>My projects</h1>
-      {renderProjects()}
+      {renderProjects(data.allContentfulPortfolioProjects.edges)}
     </section>
     <section
       className={mainStyles.fourthSection}
@@ -141,43 +167,45 @@ const Main = () => {
         {" "}
         <FontAwesomeIcon icon={faArrowDown} />
       </h1>
-      <form
-        className={mainStyles.form}
-        onSubmit={handleSendEmail}
+      <Formik
+        initialValues={{
+          name: "",
+          email:"",
+          message:"",
+        }}
+        onSubmit={(values, actions)=>{
+          handleSendEmail(values, ()=>{actions.resetForm({name:"", email:"", message:""})});
+        }}
       >
-        <TextError errorMessage={errorMessage} />
-        <label htmlFor="message"></label>
-        <textarea
-          id="message"
-          name='message'
-          placeholder="message"
-          value={message}
-          onChange={(e) => { setmessage(e.target.value) }}
-        />
-        <label htmlFor="email"></label>
-        <input
-          id="email"
-          name="email"
-          placeholder="e-mail"
-          type="email"
-          autoComplete="off"
-          value={email}
-          onChange={(e) => { setemail(e.target.value) }}
-        />
-        <label htmlFor="name"></label>
-        <input
-          id="name"
-          name="name"
-          placeholder="name"
-          type="name"
-          autoComplete="off"
-          value={name}
-          onChange={(e) => { setname(e.target.value) }}
-        />
-        <button type="submit">
-          <FontAwesomeIcon icon={faArrowRight} />
-        </button>
-      </form>
+        <Form className={mainStyles.form}>
+          <TextError errorMessage={errorMessage}/>
+          <Field 
+            as="textarea" 
+            name="message" 
+            id="message" 
+            type="message" 
+            placeholder="message" 
+            autoComplete="off"
+          />
+          <Field 
+            name="email" 
+            id="email" 
+            type="email" 
+            placeholder="email" 
+            autoComplete="off"
+          />
+          <Field 
+            name="name" 
+            id="name" 
+            type="name" 
+            placeholder="name" 
+            autoComplete="off"
+          />
+          <button type="submit">
+            <FontAwesomeIcon icon={faArrowRight} />
+          </button>
+        </Form>
+      </Formik>
     </section>
   </main>);
 }
