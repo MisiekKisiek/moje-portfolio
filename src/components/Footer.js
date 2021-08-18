@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope ,faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 //styles
@@ -46,7 +46,7 @@ const Footer = () => {
       const { id, projectName, liveLink} = project.node;
 
       return (<li key={id}>
-        <a href={liveLink} target="_blank">{projectName}</a>
+        <a href={liveLink} target="_blank" rel="noreferrer">{projectName}</a>
       </li>)
     })
     return projectsElements
@@ -61,10 +61,10 @@ const Footer = () => {
     </section>
     <section className={footerStyles.footerContact}>
       <span>
-        <a href="https://www.instagram.com/kisiekm" target="_blank"><FontAwesomeIcon icon={faInstagram}/></a>
+        <a href="https://www.instagram.com/kisiekm" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faInstagram}/></a>
       </span>
       <span>
-        <a href="https://github.com/MisiekKisiek" target="_blank"><FontAwesomeIcon icon={faGithub}/></a>
+        <a href="https://github.com/MisiekKisiek" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faGithub}/></a>
       </span>
       <span>
         <a href="mailto: skrzypkka@gmail.com"><FontAwesomeIcon icon={faEnvelope}/></a>

@@ -26,8 +26,8 @@ const Project = ({ projectName, liveLink, githubLink, projectScreen, alt }) => {
           image={projectScreen}
           alt={alt}
         />
-        <a href={liveLink} target="_blank">Live</a>
-        <a href={githubLink} target="_blank">Github</a>
+        <a href={liveLink} target="_blank" rel="noreferrer">Live</a>
+        <a href={githubLink} target="_blank" rel="noreferrer">Github</a>
       </div>
     </div>
   );

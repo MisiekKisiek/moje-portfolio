@@ -124,7 +124,7 @@ const Main = () => {
         }}
       >
         <span>just</span>
-        <span>contact</span>
+        <span>write me</span>
       </button>
     </section>
     <section
@@ -157,10 +157,16 @@ const Main = () => {
           </span>
         </div>
       </div>
-      <p className={mainStyles.aboutParagraph}>
-        Hi!
-        As
-      </p>
+      <article className={mainStyles.aboutParagraph}>
+        <p>
+          <span>Hi!</span>
+          <br />
+          <span>My name is Michał Skrzypiec, I live in Kraków and currently working as a junior project menager in road construction industry.</span>
+          <br />
+          <span>Despite I enjoy my job, I want to move on, so now i want to change my profession to frontend developer.</span>
+          React-typewriter-effect!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        </p>
+      </article>
     </section>
     <section
       className={mainStyles.thirdSection}
