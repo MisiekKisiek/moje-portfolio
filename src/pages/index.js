@@ -5,7 +5,8 @@ import emailjs from 'emailjs-com';
 import { Formik, Form, Field } from "formik";
 import scrollTo from 'gatsby-plugin-smoothscroll';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowRight, faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
+import TypeWriterEffect from 'react-typewriter-effect';
 
 
 //Components
@@ -26,6 +27,11 @@ const Main = () => {
   const [aboutSpanFirstPosition, setaboutSpanFirstPosition] = useState(0);
   const [aboutSpanSecondPosition, setaboutSpanSecondPosition] = useState(0);
   const [errorMessage, seterrorMessage] = useState("");
+  const svg = document.querySelector
+
+  const s = new XMLSerializer();
+  // const pizzaIcon = s.serializeToString(<FontAwesomeIcon icon={faPizzaSlice}/>);
+  console.log(<FontAwesomeIcon icon={faPizzaSlice}/>);
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -157,15 +163,39 @@ const Main = () => {
           </span>
         </div>
       </div>
-      <article className={mainStyles.aboutParagraph}>
-        <p>
-          <span>Hi!</span>
-          <br />
-          <span>My name is Michał Skrzypiec, I live in Kraków and currently working as a junior project menager in road construction industry.</span>
-          <br />
-          <span>Despite I enjoy my job, I want to move on, so now i want to change my profession to frontend developer.</span>
-          React-typewriter-effect!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        </p>
+      <article 
+        className={mainStyles.aboutParagraph}
+        
+      >
+          <TypeWriterEffect 
+            text={`Hi!`}
+            textStyle={{ fontSize:  `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px"}}
+            cursorColor="rgba(255,255,255,0.8)"
+            startDelay={300}
+            typeSpeed={30}
+            hideCursorAfterText={true}
+          />
+          <TypeWriterEffect 
+            text={`My name is Michał Skrzypiec. I live in Kraków and currently working as a junior project menager in road construction industry.`}
+            textStyle={{ fontSize:  `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px"}}
+            cursorColor="rgba(255,255,255,0.8)"
+            startDelay={600}
+            typeSpeed={30}
+            hideCursorAfterText={true}
+          />
+          <TypeWriterEffect 
+            text={`Despite I enjoy my job, I want to move on. For last 2y I was learning frontend technologies and now I'm looking for new opportunities as a full time frontend dev.`}
+            textStyle={{ fontSize:  `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px"}}
+            cursorColor="rgba(255,255,255,0.8)"
+            startDelay={5000}
+            typeSpeed={30}
+          />
+          <TypeWriterEffect 
+            text={`Except coding I'm itch with making a pizza , sushi too and hikking!.`}
+            textStyle={{ fontSize:  `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px"}}
+            cursorColor="rgba(255,255,255,0.8)"
+            typeSpeed={30}
+          />
       </article>
     </section>
     <section
