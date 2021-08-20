@@ -82,6 +82,172 @@
 
 //Second Section
 
+@keyframes htmlIconAnimation{
+  0%{ 
+    transform: scale(1,1); 
+  }
+  2%{ 
+    transform: scale(1.1,.9) translateX(0px) rotateZ(-10deg); 
+  }
+  6%{ 
+    transform: scale(.9,1.1) translateX(0px) rotateZ(20deg); 
+  }
+  10%{ 
+    transform: scale(1,1) translateX(0px) rotateZ(-10deg); 
+  }
+  12%{ 
+    transform: scale(.9,1.1) translateX(0px) rotateZ(10deg); 
+  }
+  16%{ 
+    transform: scale(1.1,.9) translateX(0px) rotateZ(-20deg); 
+  }
+  20%{ 
+    transform: scale(1,1) translateX(0px) rotateZ(0deg); 
+  }
+  100%{ 
+    transform: scale(1,1) rotateZ(0deg); ; 
+    
+  }
+}
+
+@keyframes cssIconAnimation{
+  0%{ 
+    transform: scale(1,1); 
+  }
+  2%{ 
+    transform: scale(1.1,.9) translateY(-10px); 
+  }
+  6%{ 
+    transform: scale(.9,1.1) translateY(10px); 
+  }
+  10%{ 
+    transform: scale(1,1) translateY(0px); 
+  }
+  100%{ 
+    transform: scale(1,1); 
+  }
+}
+
+@keyframes jsIconAnimation{
+  0%{ 
+    transform: scale(1,1); 
+  }
+  2%{ 
+    transform: scale(1.1,.9); 
+  }
+  6%{ 
+    transform: scale(.9,1.1); 
+  }
+  10%{ 
+    transform: scale(1,1); 
+  }
+  100%{ 
+    transform: scale(1,1); 
+  }
+}
+
+@keyframes reactIconAnimation{
+  0%{
+    transform: rotateZ(0deg);
+  }
+  100%{
+    transform: rotateZ(360deg);
+  }
+}
+
+@keyframes nodeIconAnimation{
+  0%{
+    transform: scale(1,1) translateX(0px); 
+  }
+  2%{
+    transform: scale(.9,1) translateX(-10px); 
+  }
+  6%{
+    transform: scale(1.1,1) translateX(20px);
+  }
+  10%{
+    transform: scale(1,1) translateX(0px);
+  }
+  12%{
+    transform: scale(.95,1) translateX(-5px);
+  }
+  16%{
+    transform: scale(1.05,1) translateX(10px);
+  }
+  20%{
+    transform: scale(1,1) translateX(0px);
+  }
+  22%{
+    transform: scale(.98,1) translateX(-2px);
+  }
+  26%{
+    transform: scale(1.02,1) translateX(4px);
+  }
+  30%{
+    transform: scale(1,1) translateX(0px);
+  }
+  100%{
+    transform: scale(1,1);
+  }
+}
+
+@keyframes mongoIconAniamtion{
+  0%{}
+  100%{}
+}
+
+@keyframes gitIconAnimation{
+  0%{ 
+    transform: scale(1,1); 
+  }
+  2%{ 
+    transform: scale(1.1,.9) translateY(-10px); 
+  }
+  6%{ 
+    transform: scale(.9,1.1) translateY(10px); 
+  }
+  10%{ 
+    transform: scale(1,1) translateY(0px); 
+  }
+  100%{ 
+    transform: scale(1,1); 
+  }
+}
+
+@keyframes dockerIconAnimation{
+  0%{
+    transform: scale(1,1); 
+  }
+  2%{
+    transform: scale(.9,1) translateX(-5px) rotateZ(-5deg);
+  }
+  6%{
+    transform: scale(1,1.1) translateX(10px) rotateZ(10deg);
+  }
+  10%{
+    transform: scale(1,1) translateX(-5px) translateY(-25px) rotateZ(-5deg);
+  }
+  24%{
+    transform: scale(.8,1) translateY(160px) translateX(0px) rotateZ(-80deg);
+    opacity: 1;
+  }
+  29%{
+    transform: translateY(160px);
+    opacity: 0;
+  }
+  30%{
+    transform: scale(0.01);
+  }
+  50%{
+    opacity: 1;
+    transform: scale(0.01);
+  }
+  60%{
+    transform: scale(1);
+  }
+  100%{}
+}
+
 //Third Section
 
 //fourthSection

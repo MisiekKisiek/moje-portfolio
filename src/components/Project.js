@@ -11,7 +11,7 @@ const Project = ({ projectName, liveLink, githubLink, projectScreen, alt }) => {
     >
       <h2
         data-sal="slide-up"
-        data-sal-delay="1000"
+        data-sal-delay="300"
         data-sal-easing="ease"
       >
         {projectName}

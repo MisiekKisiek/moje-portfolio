@@ -5,9 +5,9 @@ import emailjs from 'emailjs-com';
 import { Formik, Form, Field } from "formik";
 import scrollTo from 'gatsby-plugin-smoothscroll';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown, faArrowRight, faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowRight, faLeaf } from '@fortawesome/free-solid-svg-icons';
+import { faReact, faHtml5, faCss3Alt, faJs, faNode, faDocker, faGitAlt } from '@fortawesome/free-brands-svg-icons';
 import TypeWriterEffect from 'react-typewriter-effect';
-
 
 //Components
 import Project from '../components/Project';
@@ -27,11 +27,6 @@ const Main = () => {
   const [aboutSpanFirstPosition, setaboutSpanFirstPosition] = useState(0);
   const [aboutSpanSecondPosition, setaboutSpanSecondPosition] = useState(0);
   const [errorMessage, seterrorMessage] = useState("");
-  const svg = document.querySelector
-
-  const s = new XMLSerializer();
-  // const pizzaIcon = s.serializeToString(<FontAwesomeIcon icon={faPizzaSlice}/>);
-  console.log(<FontAwesomeIcon icon={faPizzaSlice}/>);
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -163,46 +158,91 @@ const Main = () => {
           </span>
         </div>
       </div>
-      <article 
+      <article
         className={mainStyles.aboutParagraph}
-        
+
       >
-          <TypeWriterEffect 
-            text={`Hi!`}
-            textStyle={{ fontSize:  `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px"}}
-            cursorColor="rgba(255,255,255,0.8)"
-            startDelay={300}
-            typeSpeed={30}
-            hideCursorAfterText={true}
-          />
-          <TypeWriterEffect 
-            text={`My name is Michał Skrzypiec. I live in Kraków and currently working as a junior project menager in road construction industry.`}
-            textStyle={{ fontSize:  `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px"}}
-            cursorColor="rgba(255,255,255,0.8)"
-            startDelay={600}
-            typeSpeed={30}
-            hideCursorAfterText={true}
-          />
-          <TypeWriterEffect 
-            text={`Despite I enjoy my job, I want to move on. For last 2y I was learning frontend technologies and now I'm looking for new opportunities as a full time frontend dev.`}
-            textStyle={{ fontSize:  `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px"}}
-            cursorColor="rgba(255,255,255,0.8)"
-            startDelay={5000}
-            typeSpeed={30}
-          />
-          <TypeWriterEffect 
-            text={`Except coding I'm itch with making a pizza , sushi too and hikking!.`}
-            textStyle={{ fontSize:  `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px"}}
-            cursorColor="rgba(255,255,255,0.8)"
-            typeSpeed={30}
-          />
+        <TypeWriterEffect
+          text={`Hi!`}
+          textStyle={{ fontSize: `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px" }}
+          cursorColor="rgba(255,255,255,0.8)"
+          startDelay={300}
+          typeSpeed={30}
+          hideCursorAfterText={true}
+        />
+        <TypeWriterEffect
+          text={`My name is Michał Skrzypiec. I live in Kraków and currently working as a junior project menager in road construction industry.`}
+          textStyle={{ fontSize: `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px" }}
+          cursorColor="rgba(255,255,255,0.8)"
+          startDelay={600}
+          typeSpeed={300}
+          hideCursorAfterText={true}
+        />
+        <TypeWriterEffect
+          text={`Despite I enjoy my job, I want to move on. For last 2y I was learning frontend technologies and now I'm looking for new opportunities as a full time frontend dev.`}
+          textStyle={{ fontSize: `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px" }}
+          cursorColor="rgba(255,255,255,0.8)"
+          startDelay={5200}
+          typeSpeed={30}
+          hideCursorAfterText={true}
+        />
+        <TypeWriterEffect
+          text={`Except coding I'm itch with making a pizza , sushi too and hikking!`}
+          textStyle={{ fontSize: `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px" }}
+          cursorColor="rgba(255,255,255,0.8)"
+          startDelay={10000}
+          typeSpeed={30}
+          hideCursorAfterText={true}
+        />
       </article>
+      <div className={mainStyles.skills}>
+        <h1>Technologic stuff</h1>
+        <ul>
+          <li>
+            <FontAwesomeIcon icon={faHtml5} />
+            <h2>HTML5</h2>
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faCss3Alt} />
+            <h2>CSS3</h2>
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faJs} />
+            <h2>JavaScript ES6</h2>
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faReact} />
+            <h2>React / CRA / Gatsby</h2>
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faNode} />
+            <h2>NodeJS</h2>
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faLeaf} />
+            <h2>MongoDB</h2>
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faGitAlt} />
+            <h2>GIT</h2>
+          </li>
+          <li>
+            <div>
+              <FontAwesomeIcon icon={faDocker} />
+            </div>
+            <h2>Docker PS</h2>
+          </li>
+        </ul>
+      </div>
+      <h2>
+        If you want to see it in action, check my projects below <FontAwesomeIcon icon={faArrowDown} />
+      </h2>
     </section>
     <section
       className={mainStyles.thirdSection}
       id="projects"
     >
-      <h1>My projects</h1>
+      {/* <h1>My projects</h1> */}
       {renderProjects(data.allContentfulPortfolioProjects.edges)}
     </section>
     <section

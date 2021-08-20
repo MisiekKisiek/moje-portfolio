@@ -108,6 +108,15 @@
     font-size: 2rem;
     color: $secondColor;
   }
+  h2{
+    margin: 40px auto;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: normal;
+    svg{
+      font-weight: bold;
+    }
+  }
 }
 
 .profileImage{
@@ -168,6 +177,80 @@
     font-family: monospace;
     span{
       line-height: 20px;
+    }
+  }
+}
+
+.skills{
+  h1{
+
+  }
+  ul{
+    list-style-type: none;
+    li{
+      min-height: 160px;
+      text-align: center;
+      svg{
+        font-size: 4rem; 
+      }
+      &:nth-of-type(1){
+        svg{
+          color: #e34c26;
+          animation: htmlIconAnimation 4s infinite linear;
+        }
+      }
+      &:nth-of-type(2){
+        svg{
+          color: #2965f1;
+          animation: cssIconAnimation 4s infinite linear;
+        }
+      }
+      &:nth-of-type(3){
+        svg{
+          color: #f0db4f;
+          animation: jsIconAnimation 4s infinite ease;
+        }
+      }
+      &:nth-of-type(4){
+        svg{
+          color: #61dbfb;
+          animation: reactIconAnimation 6s infinite linear;
+        }
+      }
+      &:nth-of-type(5){
+        svg{
+          color: #68a063;
+          animation: nodeIconAnimation 4s 1s infinite linear;
+        }
+      }
+      &:nth-of-type(6){
+        svg{
+          color: #40b33d;
+          animation: htmlIconAnimation 6s infinite linear;
+        }
+      }
+      &:nth-of-type(7){
+        svg{
+          color: #f34f29;
+          animation: gitIconAnimation 6s infinite linear;
+        }
+      }
+      &:nth-of-type(8){
+        div{
+          @include flex-mother($align-items: flex-end, $justify-content: center);
+          min-height: 90px;
+          overflow: hidden;
+        }
+        svg{
+          display: inline-block;
+          color: #0db7ed;          
+          animation: dockerIconAnimation 6s infinite linear;
+        }
+      }
+      h2{
+        margin: 20px 0;
+        font-size: 1.2rem;
+      }
     }
   }
 }
