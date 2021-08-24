@@ -88,24 +88,19 @@
   }
 }
 
-
-
-
-
-
-
-
-
-
 //Second section
 
 .secondSection{
-  @include flex-mother($flex-direction: column, $align-items: center, $flex-wrap: wrap);
+  @include flex-mother($flex-direction: row, $align-items: center, $flex-wrap: wrap);
   animation: sectionFirstLoad 1s 1.4s forwards ease;
+  max-width: 800px;
+  margin: auto;
   color: rgba(255,255,255,1);
   h1{
+    width: 100%;
     margin: 35px 0 40px 0;
     font-size: 2rem;
+    text-align: center;
     color: $secondColor;
   }
   h2{
@@ -122,6 +117,7 @@
 .profileImage{
   position: relative;
   width: 100%;
+  max-width: 360px;
   div:nth-of-type(1){
     position: relative;
     width: 75%;
@@ -142,6 +138,7 @@
 }
 
 .walkingText{
+  overflow: hidden;
   span{
     position: relative;
     display: inline-block;
@@ -158,33 +155,37 @@
     right: 0;
     writing-mode: vertical-rl;
     text-orientation: mixed;
-    overflow: hidden;
     z-index: -1;
-    span{
-    }
   }
   &:nth-child(3){
     position: relative;
+    max-width: 360px;
     background-color: $mainColor;
     z-index: 11;
   }
 }
 
 .aboutParagraph{
-  margin: 20px 20px;
-  p{
-    text-indent: 10px;
-    font-family: monospace;
-    span{
-      line-height: 20px;
+  @include flex-mother($flex-direction: column, $align-items: start);
+  width: 100%;
+  min-height: 330px;
+  padding: 30px 20px 0 20px;
+  div{
+    h1{
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: normal;
+      text-align: start;
+      text-indent: 10px;
+      div{
+        opacity: 0;
+      }
     }
   }
 }
 
 .skills{
-  h1{
-
-  }
+  width: 100%;
   ul{
     list-style-type: none;
     li{
@@ -196,13 +197,13 @@
       &:nth-of-type(1){
         svg{
           color: #e34c26;
-          animation: htmlIconAnimation 4s infinite linear;
+          animation: htmlIconAnimation 5s 1s infinite linear;
         }
       }
       &:nth-of-type(2){
         svg{
           color: #2965f1;
-          animation: cssIconAnimation 4s infinite linear;
+          animation: cssIconAnimation 4s 1s infinite linear;
         }
       }
       &:nth-of-type(3){
@@ -242,6 +243,7 @@
           overflow: hidden;
         }
         svg{
+          position: relative;
           display: inline-block;
           color: #0db7ed;          
           animation: dockerIconAnimation 6s infinite linear;
@@ -255,20 +257,69 @@
   }
 }
 
+@media(min-width: $breakPoint1){
+  .secondSection{
+    @include flex-mother($flex-direction: row, $align-items: flex-start, $justify-content:space-around, $flex-wrap: wrap);
+  }
+  .profileImage{
+    width: 50%;
+    max-width: 300px;
+  }
+  .aboutParagraph{
+    width: 50%;
+    max-width: 300px;
+    padding-top: 0;
+  }
+  .skills{
+    max-width: 600px;
+    margin: auto;
+    ul{
+      @include flex-mother($flex-direction:row, $align-items: center, $justify-content: center, $flex-wrap: wrap);
+      li{
+        flex-basis: 40%;
+      }
+    }
+  }
+}
 
+@media (min-width: $breakPoint2){
+  .secondSection{
+    h1{
+      font-size: 2.8rem;
+    }
+    h2{
+      font-size: 1.6rem;
+    }
+  }
+  .skills{
+    h1{
+      margin: 50px 0;
+      font-size: 2.4rem;
+    }
+    ul{
+      li{
+        flex-basis: 33%;
+      }
+    }
+  }
+  .aboutParagraph{
+    div{
+      h1{
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+@media (min-width: $breakPoint3){
+  .aboutParagraph{
+    div{
+      h1{
+        font-size: 1.25rem;
+      }
+    }
+  }
+}
 
 //Third section
 
@@ -279,11 +330,6 @@
   padding: 20px;
   padding-bottom: 0;
   animation: sectionFirstLoad 1s 1.4s forwards ease;
-  h1{
-    margin: 20px 0 40px 0;
-    font-size: 2rem;
-    color: $secondColor;
-  }
 }
 
 .project{
@@ -416,21 +462,6 @@
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Fourth section
 

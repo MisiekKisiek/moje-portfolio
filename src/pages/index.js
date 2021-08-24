@@ -5,7 +5,7 @@ import emailjs from 'emailjs-com';
 import { Formik, Form, Field } from "formik";
 import scrollTo from 'gatsby-plugin-smoothscroll';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown, faArrowRight, faLeaf } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowRight, faLeaf, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { faReact, faHtml5, faCss3Alt, faJs, faNode, faDocker, faGitAlt } from '@fortawesome/free-brands-svg-icons';
 import TypeWriterEffect from 'react-typewriter-effect';
 
@@ -27,6 +27,7 @@ const Main = () => {
   const [aboutSpanFirstPosition, setaboutSpanFirstPosition] = useState(0);
   const [aboutSpanSecondPosition, setaboutSpanSecondPosition] = useState(0);
   const [errorMessage, seterrorMessage] = useState("");
+  const [formButton, setformButton] = useState(faSpinner);
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -99,15 +100,17 @@ const Main = () => {
   }
 
   const handleSendEmail = (values, resetFunc) => {
+    setformButton(faSpinner);
     emailjs.send('gmail', 'Portfolio', values, `user_qZY7FllS46aSyJuEosQN8`)
       .then((result) => {
         resetFunc();
         seterrorMessage("We send it!");
+        setformButton(faArrowRight);
         console.log(result.status);
       }, (error) => {
         seterrorMessage("Something went wrong, try again later :(");
+        setformButton(faArrowRight);
         console.log(error.text);
-
       });
   }
 
@@ -160,38 +163,34 @@ const Main = () => {
       </div>
       <article
         className={mainStyles.aboutParagraph}
-
+        id="articleAbout"
       >
         <TypeWriterEffect
           text={`Hi!`}
-          textStyle={{ fontSize: `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px" }}
           cursorColor="rgba(255,255,255,0.8)"
           startDelay={300}
-          typeSpeed={30}
+          typeSpeed={20}
           hideCursorAfterText={true}
         />
         <TypeWriterEffect
           text={`My name is Michał Skrzypiec. I live in Kraków and currently working as a junior project menager in road construction industry.`}
-          textStyle={{ fontSize: `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px" }}
           cursorColor="rgba(255,255,255,0.8)"
           startDelay={600}
-          typeSpeed={300}
+          typeSpeed={20}
           hideCursorAfterText={true}
         />
         <TypeWriterEffect
           text={`Despite I enjoy my job, I want to move on. For last 2y I was learning frontend technologies and now I'm looking for new opportunities as a full time frontend dev.`}
-          textStyle={{ fontSize: `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px" }}
           cursorColor="rgba(255,255,255,0.8)"
-          startDelay={5200}
-          typeSpeed={30}
+          startDelay={3800}
+          typeSpeed={20}
           hideCursorAfterText={true}
         />
         <TypeWriterEffect
-          text={`Except coding I'm itch with making a pizza , sushi too and hikking!`}
-          textStyle={{ fontSize: `1.1rem`, margin: 0, fontWeight: `normal`, textIndent: "10px" }}
+          text={`Except coding I'm itch with making a pizza , sushi too and hiking!`}
           cursorColor="rgba(255,255,255,0.8)"
-          startDelay={10000}
-          typeSpeed={30}
+          startDelay={7700}
+          typeSpeed={20}
           hideCursorAfterText={true}
         />
       </article>
@@ -230,11 +229,11 @@ const Main = () => {
             <div>
               <FontAwesomeIcon icon={faDocker} />
             </div>
-            <h2>Docker PS</h2>
+            <h2>Docker</h2>
           </li>
         </ul>
       </div>
-      <h2>
+      <h2 className={mainStyles.lastTitle}>
         If you want to see it in action, check my projects below <FontAwesomeIcon icon={faArrowDown} />
       </h2>
     </section>
@@ -242,7 +241,6 @@ const Main = () => {
       className={mainStyles.thirdSection}
       id="projects"
     >
-      {/* <h1>My projects</h1> */}
       {renderProjects(data.allContentfulPortfolioProjects.edges)}
     </section>
     <section
@@ -298,7 +296,7 @@ const Main = () => {
             autoComplete="off"
           />
           <button type="submit">
-            <FontAwesomeIcon icon={faArrowRight} />
+            <FontAwesomeIcon icon={formButton} />
           </button>
         </Form>
       </Formik>
