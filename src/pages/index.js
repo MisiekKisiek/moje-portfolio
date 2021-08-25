@@ -27,7 +27,7 @@ const Main = () => {
   const [aboutSpanFirstPosition, setaboutSpanFirstPosition] = useState(0);
   const [aboutSpanSecondPosition, setaboutSpanSecondPosition] = useState(0);
   const [errorMessage, seterrorMessage] = useState("");
-  const [formButton, setformButton] = useState(faSpinner);
+  const [formButton, setformButton] = useState(faArrowRight);
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
