@@ -8,7 +8,7 @@ import AppContext from '../context/App.context';
 //styles
 import * as headerStyles from '../styles/header.module.scss';
 
-const Header = ({ }) => {
+const Header = () => {
 
   const {
     scrollDirection,

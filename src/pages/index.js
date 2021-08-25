@@ -1,13 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { useStaticQuery, graphql } from 'gatsby';
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import emailjs from 'emailjs-com';
 import { Formik, Form, Field } from "formik";
+import * as Yup from 'yup';
 import scrollTo from 'gatsby-plugin-smoothscroll';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faArrowRight, faLeaf, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { faReact, faHtml5, faCss3Alt, faJs, faNode, faDocker, faGitAlt } from '@fortawesome/free-brands-svg-icons';
 import TypeWriterEffect from 'react-typewriter-effect';
+
+//Context
+import AppContext from '../context/App.context';
 
 //Components
 import Project from '../components/Project';
@@ -16,17 +20,20 @@ import TextError from '../components/TextError';
 //Styles
 import * as mainStyles from '../styles/main.module.scss';
 
-//Tools
+const Main = ({}) => {
 
-
-const Main = () => {
+  const {
+    handleErrorMessage,
+    errorMessage,
+    handleContactFormSending,
+    contactFormSending,
+  } = useContext(AppContext);
 
   const [bouncyBallPosition, setbouncyBallPosition] = useState(0);
   const aboutSpanFirst = useRef(null);
   const aboutSpanSecond = useRef(null);
   const [aboutSpanFirstPosition, setaboutSpanFirstPosition] = useState(0);
   const [aboutSpanSecondPosition, setaboutSpanSecondPosition] = useState(0);
-  const [errorMessage, seterrorMessage] = useState("");
   const [formButton, setformButton] = useState(faArrowRight);
 
   useEffect(() => {
@@ -99,16 +106,22 @@ const Main = () => {
     return projectsElements
   }
 
+  const contactFormSchema = Yup.object().shape({
+    message: Yup.string().min(10, "Message must have minimum 10 characters.").required('Message text is required!'), 
+    email: Yup.string().email('Invalid email').required('Email is required!'),
+    name: Yup.string().min(4, "Name must be minimum 4 characters.").required('Name is required!'), 
+  })
+
   const handleSendEmail = (values, resetFunc) => {
     setformButton(faSpinner);
     emailjs.send('gmail', 'Portfolio', values, `user_qZY7FllS46aSyJuEosQN8`)
       .then((result) => {
         resetFunc();
-        seterrorMessage("We send it!");
+        handleErrorMessage("We send it!");
         setformButton(faArrowRight);
         console.log(result.status);
       }, (error) => {
-        seterrorMessage("Something went wrong, try again later :(");
+        handleErrorMessage("Something went wrong, try again later :(");
         setformButton(faArrowRight);
         console.log(error.text);
       });
@@ -267,10 +280,11 @@ const Main = () => {
           email: "",
           message: "",
         }}
+        validationSchema={contactFormSchema}
         onSubmit={(values, actions) => {
           handleSendEmail(values, () => { actions.resetForm({ name: "", email: "", message: "" }) });
         }}
-      >
+      >{({ errors, touched })=>(
         <Form className={mainStyles.form}>
           <TextError errorMessage={errorMessage} />
           <Field
@@ -281,6 +295,7 @@ const Main = () => {
             placeholder="message"
             autoComplete="off"
           />
+          {errors.message && touched.message ? handleErrorMessage(errors.message) : null}
           <Field
             name="email"
             id="email"
@@ -288,6 +303,7 @@ const Main = () => {
             placeholder="email"
             autoComplete="off"
           />
+          {/* {errors.email && touched.email ? handleErrorMessage(errors.email) : null} */}
           <Field
             name="name"
             id="name"
@@ -295,10 +311,13 @@ const Main = () => {
             placeholder="name"
             autoComplete="off"
           />
+          {/* {errors.name && touched.name ? handleErrorMessage(errors.name) : null} */}
           <button type="submit">
             <FontAwesomeIcon icon={formButton} />
           </button>
         </Form>
+      )}
+        
       </Formik>
     </section>
   </main>);

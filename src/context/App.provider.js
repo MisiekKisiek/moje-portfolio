@@ -32,11 +32,25 @@ class AppProvider extends Component {
         })
     }
 
+    handleErrorMessage = (value) => {
+        this.setState({
+            errorMessage: value,
+        })
+    }
 
+    handleContactFormSending = (value) => {
+        this.setState({
+            contactFormSending: value,
+        })
+    }
 
     render() { 
         return ( <AppContext.Provider value={{
-            scrollDirection: this.state.scrollDirection
+            scrollDirection: this.state.scrollDirection,
+            errorMessage: this.state.errorMessage,
+            handleErrorMessage: this.handleErrorMessage,
+            contactFormSending: this.state.contactFormSending,
+            handleContactFormSending: this.handleContactFormSending,
           }}>
             {this.props.children}
           </AppContext.Provider>
