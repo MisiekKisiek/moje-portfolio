@@ -15,16 +15,15 @@ import AppContext from '../context/App.context';
 
 //Components
 import Project from '../components/Project';
-import TextError from '../components/TextError';
+import TextSuccess from '../components/TextSuccess';
 
 //Styles
 import * as mainStyles from '../styles/main.module.scss';
 
-const Main = ({}) => {
+const Main = ({ }) => {
 
   const {
     handleErrorMessage,
-    errorMessage,
     handleContactFormSending,
     contactFormSending,
   } = useContext(AppContext);
@@ -107,9 +106,9 @@ const Main = ({}) => {
   }
 
   const contactFormSchema = Yup.object().shape({
-    message: Yup.string().min(10, "Message must have minimum 10 characters.").required('Message text is required!'), 
+    name: Yup.string().min(4, "Name must be minimum 4 characters.").required('Name is required!'),
     email: Yup.string().email('Invalid email').required('Email is required!'),
-    name: Yup.string().min(4, "Name must be minimum 4 characters.").required('Name is required!'), 
+    message: Yup.string().min(10, "Message must have minimum 10 characters.").required('Message text is required!'),
   })
 
   const handleSendEmail = (values, resetFunc) => {
@@ -118,10 +117,16 @@ const Main = ({}) => {
       .then((result) => {
         resetFunc();
         handleErrorMessage("We send it!");
+        setTimeout(() => {
+          handleErrorMessage("");
+        }, 5000);
         setformButton(faArrowRight);
         console.log(result.status);
       }, (error) => {
         handleErrorMessage("Something went wrong, try again later :(");
+        setTimeout(() => {
+          handleErrorMessage("");
+        }, 5000);
         setformButton(faArrowRight);
         console.log(error.text);
       });
@@ -284,9 +289,12 @@ const Main = ({}) => {
         onSubmit={(values, actions) => {
           handleSendEmail(values, () => { actions.resetForm({ name: "", email: "", message: "" }) });
         }}
-      >{({ errors, touched })=>(
+      >{({ errors, touched }) => (
         <Form className={mainStyles.form}>
-          <TextError errorMessage={errorMessage} />
+          <TextSuccess />
+          {errors.name && touched.name ? (<span>{errors.name}</span>) : null}
+          {errors.email && touched.email ? (<span>{errors.email}</span>) : null}
+          {errors.message && touched.message ? (<span>{errors.message}</span>) : null}
           <Field
             as="textarea"
             name="message"
@@ -295,7 +303,6 @@ const Main = ({}) => {
             placeholder="message"
             autoComplete="off"
           />
-          {errors.message && touched.message ? handleErrorMessage(errors.message) : null}
           <Field
             name="email"
             id="email"
@@ -303,7 +310,6 @@ const Main = ({}) => {
             placeholder="email"
             autoComplete="off"
           />
-          {/* {errors.email && touched.email ? handleErrorMessage(errors.email) : null} */}
           <Field
             name="name"
             id="name"
@@ -311,13 +317,11 @@ const Main = ({}) => {
             placeholder="name"
             autoComplete="off"
           />
-          {/* {errors.name && touched.name ? handleErrorMessage(errors.name) : null} */}
           <button type="submit">
             <FontAwesomeIcon icon={formButton} />
           </button>
         </Form>
       )}
-        
       </Formik>
     </section>
   </main>);

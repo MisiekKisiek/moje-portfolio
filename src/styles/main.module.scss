@@ -105,6 +105,7 @@
   }
   h2{
     margin: 40px auto;
+    padding: 0 20px;
     text-align: center;
     font-size: 1.2rem;
     font-weight: normal;
@@ -250,7 +251,7 @@
         }
       }
       h2{
-        margin: 20px 0;
+        margin: 20px;
         font-size: 1.2rem;
       }
     }
@@ -312,6 +313,31 @@
 }
 
 @media (min-width: $breakPoint3){
+  .profileImage{
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    div:nth-of-type(1){
+      position: relative;
+      width: 75%;
+      margin: auto;
+      border-radius: 5px;
+      border: 1px solid black;
+      box-sizing: unset;
+      &::after{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.1);
+      }
+    }
+  }
+  .walkingText{
+    display: none;
+  }
   .aboutParagraph{
     div{
       h1{
@@ -485,6 +511,8 @@
     position: absolute;
     top: -3px;
     left: 10px;
+    width: 100%;
+    background-color: $mainColor;
     color: rgba(255,255,255,0.8);
   }
   input{
