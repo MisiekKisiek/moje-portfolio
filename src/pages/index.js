@@ -198,7 +198,7 @@ const Main = ({ }) => {
           hideCursorAfterText={true}
         />
         <TypeWriterEffect
-          text={`Despite I enjoy my job, I want to move on. For last 2y I was learning frontend technologies and now I'm looking for new opportunities as a full time frontend dev.`}
+          text={`Despite I enjoy my job, I want to move on. For last 2 years I was learning frontend technologies and now I'm looking for new opportunities as a full time frontend dev.`}
           cursorColor="rgba(255,255,255,0.8)"
           startDelay={3800}
           typeSpeed={20}
