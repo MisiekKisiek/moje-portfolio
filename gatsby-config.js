@@ -24,7 +24,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-transition-link",
       options: {
-        layout: require.resolve(`./src/layouts/layout.js`)
+        layout: require.resolve(`./src/layouts/Layout.js`)
       }
     },
     "gatsby-plugin-react-helmet",

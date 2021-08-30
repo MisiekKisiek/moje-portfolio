@@ -15,18 +15,19 @@
   h2{
     display: inline-block;
     padding-bottom: 10px;
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: rgba(255,255,255,0.5);
     border-bottom: 1px solid rgba(255,255,255,0.4);
   }
   ul{
     list-style-type: none;
     li{
-      margin: 3px 0;
+      margin: 6px 0;
       &:first-child{
         margin-top: 20px;
       }
       a{
+        font-size: 1.2rem;
         color: rgba(255,255,255,0.5);
         transition: .2s;
       }
@@ -38,9 +39,9 @@
   @include flex-mother($justify-content: flex-end);
   margin: 10px 0 60px 0;
   span{
-    margin: 0 10px;
+    margin: 0 15px;
     a{
-      font-size: 1.5rem;
+      font-size: 1.9rem;
       color: rgba(255,255,255,0.5);
       text-decoration: none;
       &:visited{

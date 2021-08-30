@@ -266,27 +266,39 @@
 @keyframes wordWalking {
   0%{
     opacity: 0;
-    left: -250px;
+    left: -230px;
   }
   9%{
     opacity: 0;
-    left: -250px;
+    left: -230px;
   }
   13%{
     opacity: 1;
-    left: -150px;
+    left: -130px;
   }
   87%{
     opacity: 1;
-    left: -150px;
+    left: -130px;
   }
   91%{
     opacity: 0;
-    left: -50px;
+    left: -30px;
   }
   100%{
     opacity: 0;
-    left: -50px;
+    left: -30px;
+  }
+}
+
+@keyframes buttonSubmit{
+  0%{
+    transform: translateY(0px) scale(1, 1);
+  }
+  50%{
+    transform: translateY(-20px) scale(.8, 1.2);
+  }
+  100%{
+    transform: translateY(0px) scale(1, 1);
   }
 }
 

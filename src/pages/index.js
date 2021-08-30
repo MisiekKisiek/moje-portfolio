@@ -6,9 +6,8 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from 'yup';
 import scrollTo from 'gatsby-plugin-smoothscroll';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown, faArrowRight, faLeaf, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowRight, faLeaf, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { faReact, faHtml5, faCss3Alt, faJs, faNode, faDocker, faGitAlt } from '@fortawesome/free-brands-svg-icons';
-import TypeWriterEffect from 'react-typewriter-effect';
 
 //Context
 import AppContext from '../context/App.context';
@@ -28,12 +27,13 @@ const Main = ({ }) => {
     contactFormSending,
   } = useContext(AppContext);
 
-  const [bouncyBallPosition, setbouncyBallPosition] = useState(0);
   const aboutSpanFirst = useRef(null);
   const aboutSpanSecond = useRef(null);
+
+  const [bouncyBallPosition, setbouncyBallPosition] = useState(0);
   const [aboutSpanFirstPosition, setaboutSpanFirstPosition] = useState(0);
   const [aboutSpanSecondPosition, setaboutSpanSecondPosition] = useState(0);
-  const [formButton, setformButton] = useState(faArrowRight);
+  const [firstSectionSpanPosition, setfirstSectionSpanPosition] = useState(0)
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -43,6 +43,8 @@ const Main = ({ }) => {
       setaboutSpanFirstPosition(spanFirstPosition);
       const spanSecondPosition = -(window.pageYOffset - aboutSpanSecond.current.offsetTop) / 20 + 28;
       setaboutSpanSecondPosition(spanSecondPosition);
+      const spanFirstSectionPosition = -window.pageYOffset / 2;
+      setfirstSectionSpanPosition(spanFirstSectionPosition);
     })
   }, [])
 
@@ -112,7 +114,7 @@ const Main = ({ }) => {
   })
 
   const handleSendEmail = (values, resetFunc) => {
-    setformButton(faSpinner);
+    handleContactFormSending(true);
     emailjs.send('gmail', 'Portfolio', values, `user_qZY7FllS46aSyJuEosQN8`)
       .then((result) => {
         resetFunc();
@@ -120,14 +122,14 @@ const Main = ({ }) => {
         setTimeout(() => {
           handleErrorMessage("");
         }, 5000);
-        setformButton(faArrowRight);
+        handleContactFormSending(false);
         console.log(result.status);
       }, (error) => {
         handleErrorMessage("Something went wrong, try again later :(");
         setTimeout(() => {
           handleErrorMessage("");
         }, 5000);
-        setformButton(faArrowRight);
+        handleContactFormSending(false);
         console.log(error.text);
       });
   }
@@ -136,6 +138,18 @@ const Main = ({ }) => {
     className={mainStyles.main}
   >
     <section className={mainStyles.firstSection}>
+      <span 
+        className={mainStyles.walkingSlogan}
+        style={{left: `${firstSectionSpanPosition}px`}}
+      >
+        HOBBY PASSION PICKA HOBBY PASSION PICKA HOBBY PASSION PICKA HOBBY PASSION PICKA
+      </span>
+      <span 
+        className={mainStyles.walkingSlogan}
+        style={{right: `${firstSectionSpanPosition}px`}}
+      >
+        HOBBY PASSION PICKA HOBBY PASSION PICKA HOBBY PASSION PICKA HOBBY PASSION PICKA
+      </span>
       <div className={mainStyles.curtine}></div>
       <GatsbyImage image={desk} alt="desk image" />
       <button
@@ -154,7 +168,13 @@ const Main = ({ }) => {
       id="about"
     >
       <h1>About</h1>
-      <div className={mainStyles.profileImage}>
+      <div 
+        className={mainStyles.profileImage}
+        data-sal="slide-up"
+        data-sal-duration="1200"
+        data-sal-delay="400"
+        data-sal-easing="ease"
+      >
         <GatsbyImage image={profileImage} alt="profile photo" />
         <div
           className={mainStyles.walkingText}
@@ -164,7 +184,9 @@ const Main = ({ }) => {
             style={{
               top: `${Math.min(Math.max(aboutSpanFirstPosition, -100), 0)}%`,
             }}
-          >Hello, it's me! Hello, it's me! Hello, it's me! Hello, it's me!</span>
+          >
+            Hello, it's me! Hello, it's me! Hello, it's me! Hello, it's me!
+          </span>
         </div>
         <div
           className={mainStyles.walkingText}
@@ -183,34 +205,38 @@ const Main = ({ }) => {
         className={mainStyles.aboutParagraph}
         id="articleAbout"
       >
-        <TypeWriterEffect
-          text={`Hi!`}
-          cursorColor="rgba(255,255,255,0.8)"
-          startDelay={300}
-          typeSpeed={20}
-          hideCursorAfterText={true}
-        />
-        <TypeWriterEffect
-          text={`My name is Michał Skrzypiec. I live in Kraków and currently working as a junior project menager in road construction industry.`}
-          cursorColor="rgba(255,255,255,0.8)"
-          startDelay={600}
-          typeSpeed={20}
-          hideCursorAfterText={true}
-        />
-        <TypeWriterEffect
-          text={`Despite I enjoy my job, I want to move on. For last 2 years I was learning frontend technologies and now I'm looking for new opportunities as a full time frontend dev.`}
-          cursorColor="rgba(255,255,255,0.8)"
-          startDelay={3800}
-          typeSpeed={20}
-          hideCursorAfterText={true}
-        />
-        <TypeWriterEffect
-          text={`Except coding I'm itch with making a pizza , sushi too and hiking!`}
-          cursorColor="rgba(255,255,255,0.8)"
-          startDelay={7700}
-          typeSpeed={20}
-          hideCursorAfterText={true}
-        />
+        <span
+          data-sal="slide-up"
+          data-sal-duration="1200"
+          data-sal-delay="300"
+          data-sal-easing="ease"
+        >
+          Hi!
+        </span>
+        <span
+          data-sal="slide-up"
+          data-sal-duration="1200"
+          data-sal-delay="400"
+          data-sal-easing="ease"
+        >
+          My name is Michał Skrzypiec. I live in Kraków and currently working as a junior project menager in road construction industry.
+        </span>
+        <span
+          data-sal="slide-up"
+          data-sal-duration="1200"
+          data-sal-delay="500"
+          data-sal-easing="ease"
+        >
+          Despite I enjoy my job, I want to move on. For last 2 years I was learning frontend technologies and now I'm looking for new opportunities as a full time frontend dev.
+        </span>
+        <span
+          data-sal="slide-up"
+          data-sal-duration="1200"
+          data-sal-delay="600"
+          data-sal-easing="ease"
+        >
+          Except coding I'm itch with making a pizza, sushi too and hiking!
+        </span>
       </article>
       <div className={mainStyles.skills}>
         <h1>Technologic stuff</h1>
@@ -318,7 +344,8 @@ const Main = ({ }) => {
             autoComplete="off"
           />
           <button type="submit">
-            <FontAwesomeIcon icon={formButton} />
+            {contactFormSending?<FontAwesomeIcon icon={faCircle} style={{fontSize: "1rem"}}/>:null}
+            {!contactFormSending?<FontAwesomeIcon icon={faArrowRight} style={{animation: `none`}}/>:null}
           </button>
         </Form>
       )}
