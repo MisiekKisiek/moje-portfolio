@@ -78,6 +78,27 @@
   }
 }
 
+
+//scrollButton
+
+@keyframes scrollButton{
+  0%{
+    top: calc(92% - 8px);
+    opacity: 0;
+  }
+  20%{
+    opacity: 1;
+  }
+  40%{
+    top: 5%;
+    opacity: 0;
+  }
+  100%{
+    top: calc(92% - 8px);
+    opacity: 0;
+  }
+}
+
 //First Section
 
 //Second Section

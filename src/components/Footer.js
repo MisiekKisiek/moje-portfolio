@@ -19,7 +19,6 @@ const Footer = () => {
             id
             projectName
             liveLink
-            githubLink
             projectScreen{
               gatsbyImageData(
                 layout: FULL_WIDTH

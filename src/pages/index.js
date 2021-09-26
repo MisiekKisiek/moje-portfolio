@@ -13,8 +13,10 @@ import { faReact, faHtml5, faCss3Alt, faJs, faNode, faDocker, faGitAlt } from '@
 import AppContext from '../context/App.context';
 
 //Components
+import Head from '../components/Head';
 import Project from '../components/Project';
 import TextSuccess from '../components/TextSuccess';
+import ScrollButton from '../components/ScrollButton';
 
 //Styles
 import * as mainStyles from '../styles/main.module.scss';
@@ -30,12 +32,14 @@ const Main = ({ }) => {
   const aboutSpanFirst = useRef(null);
   const aboutSpanSecond = useRef(null);
 
+  const [scrollUpVisible, setscrollUpVisible] = useState(false);
   const [bouncyBallPosition, setbouncyBallPosition] = useState(0);
   const [aboutSpanFirstPosition, setaboutSpanFirstPosition] = useState(0);
   const [aboutSpanSecondPosition, setaboutSpanSecondPosition] = useState(0);
-  const [firstSectionSpanPosition, setfirstSectionSpanPosition] = useState(0)
+  const [firstSectionSpanPosition, setfirstSectionSpanPosition] = useState(0);
 
   useEffect(() => {
+    if(window.pageYOffset > 100) setscrollUpVisible(false);
     window.addEventListener('scroll', () => {
       const bouncyBallPosition = -window.pageYOffset / 10;
       setbouncyBallPosition(bouncyBallPosition);
@@ -45,6 +49,8 @@ const Main = ({ }) => {
       setaboutSpanSecondPosition(spanSecondPosition);
       const spanFirstSectionPosition = -window.pageYOffset / 2;
       setfirstSectionSpanPosition(spanFirstSectionPosition);
+      if(window.pageYOffset > 100) setscrollUpVisible(true);
+      if(window.pageYOffset < 100) setscrollUpVisible(false);
     })
   }, [])
 
@@ -70,7 +76,8 @@ const Main = ({ }) => {
             id
             projectName
             liveLink
-            githubLink
+            githubLinkFront
+            githubLinkBack
             projectScreen{
               gatsbyImageData(
                 layout: FULL_WIDTH
@@ -95,10 +102,10 @@ const Main = ({ }) => {
 
     const projectsElements = projects.map((project) => {
 
-      const { id, projectName, liveLink, githubLink } = project.node;
+      const { id, projectName, liveLink, githubLinkFront, githubLinkBack } = project.node;
       const projectScreen = getImage(project.node.projectScreen);
       const alt = project.node.projectScreen.title;
-      const props = { id, projectName, liveLink, githubLink, projectScreen, alt };
+      const props = { id, projectName, liveLink, githubLinkFront, githubLinkBack, projectScreen, alt };
 
       return (
         <Project {...props} key={id} />
@@ -134,9 +141,12 @@ const Main = ({ }) => {
       });
   }
 
-  return (<main
+  return (<>
+  <Head/>
+  <main
     className={mainStyles.main}
   >
+    <ScrollButton scrollUpVisible={scrollUpVisible} onclick={() => { scrollTo('#header') }}/>
     <section className={mainStyles.firstSection}>
       <span 
         className={mainStyles.walkingSlogan}
@@ -219,7 +229,7 @@ const Main = ({ }) => {
           data-sal-delay="400"
           data-sal-easing="ease"
         >
-          My name is Michał Skrzypiec. I live in Kraków and currently working as a junior project menager in road construction industry.
+          My name is Michał Skrzypiec. I live in Kraków and currently I’m working as a junior project manager in road construction industry.
         </span>
         <span
           data-sal="slide-up"
@@ -227,7 +237,7 @@ const Main = ({ }) => {
           data-sal-delay="500"
           data-sal-easing="ease"
         >
-          Despite I enjoy my job, I want to move on. For last 2 years I was learning frontend technologies and now I'm looking for new opportunities as a full time frontend dev.
+          Although I like my job, I want to move on. For the last 2 years I have been learning frontend technologies and now I'm looking for new opportunities as a full time frontend dev but I'm open to other offers.
         </span>
         <span
           data-sal="slide-up"
@@ -235,7 +245,7 @@ const Main = ({ }) => {
           data-sal-delay="600"
           data-sal-easing="ease"
         >
-          Except coding I'm itch with making a pizza, sushi too and hiking!
+          Except coding I have an itch to make pizza, sushi too and I love hiking!
         </span>
       </article>
       <div className={mainStyles.skills}>
@@ -351,7 +361,8 @@ const Main = ({ }) => {
       )}
       </Formik>
     </section>
-  </main>);
+  </main>
+  </>);
 }
 
 export default Main;

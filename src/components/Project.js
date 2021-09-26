@@ -4,7 +4,8 @@ import { GatsbyImage } from "gatsby-plugin-image";
 //Styles
 import * as mainStyles from '../styles/main.module.scss';
 
-const Project = ({ projectName, liveLink, githubLink, projectScreen, alt }) => {
+const Project = ({ projectName, liveLink, githubLinkFront, githubLinkBack, projectScreen, alt }) => {
+
   return (
     <div
       className={mainStyles.project}
@@ -28,7 +29,24 @@ const Project = ({ projectName, liveLink, githubLink, projectScreen, alt }) => {
           alt={alt}
         />
         <a href={liveLink} target="_blank" rel="noreferrer">Live</a>
-        <a href={githubLink} target="_blank" rel="noreferrer">Github</a>
+        <a 
+          className={githubLinkBack ? mainStyles.backendLink: ""} 
+          href={githubLinkFront} 
+          target="_blank" 
+          rel="noreferrer"
+        >
+          {githubLinkBack ? "Github frontend" : "Github"}
+        </a>
+        {githubLinkBack ? (
+        <a 
+          className={mainStyles.backendLink} 
+          href={githubLinkBack} 
+          target="_blank" 
+          rel="noreferrer"
+        >
+          Github backend
+        </a>
+        ) : null}
       </div>
     </div>
   );
